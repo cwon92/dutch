@@ -27,6 +27,7 @@
 			<list>
 				<!-- <value>classpath:com/spring/dutch/mapper/파일이름.xml</value> 
 					  위의 형식으로 매퍼xml 등록하면 됩니다.-->
+				<value>classpath:com/spring/dutch/mapper/CommunityMapper.xml</value> 
 			</list>
 		</property>
 	</bean>

@@ -4,19 +4,21 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.spring.dutch.common.paging.domain.BoardPagingDTO;
 import com.spring.dutch.domain.QnaVO;
+import com.spring.dutch.dto.QnaPagingDTO;
 
 public interface QnaMapper {
 
 	//목록조회(READ)
-	public List<QnaVO> selectQnaList(BoardPagingDTO boardPaging);
+	public List<QnaVO> selectQnaList(QnaPagingDTO qnaPaging);
 	
 	//게시물총수(READ)
-	public long selectQnaTotal(BoardPagingDTO boardPaging);
+	public long selectQnaTotal(QnaPagingDTO qnaPaging);
 	
 	//특정게시물조회
 	public QnaVO selectQna(Long qno);
+	
+	public QnaVO selectQna2(Long qno);
 	
 	//등록(CREATE)
 	public int insertQna(QnaVO qna);

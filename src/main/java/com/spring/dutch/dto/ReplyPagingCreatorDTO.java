@@ -1,4 +1,4 @@
-package com.spring.dutch.common.paging.domain;
+package com.spring.dutch.dto;
 
 import java.util.List;
 

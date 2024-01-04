@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.spring.dutch.common.paging.domain.ReplyPagingDTO;
 import com.spring.dutch.domain.QnaReplyVO;
+import com.spring.dutch.dto.ReplyPagingDTO;
 
 public interface QnaReplyMapper {
 
@@ -16,7 +16,7 @@ public interface QnaReplyMapper {
 	public long selectRowTotal(long qno);
 	
 	//특정 게시물에 대한 댓글 등록(CREATE)(qrno: null)
-	public long insertQnaReplyForBoard(QnaReplyVO reply);
+	public long insertQnaReplyForQna(QnaReplyVO reply);
 	
 	//댓글에 대한 답글 등록
 	public long insertQnaReplyForReply(QnaReplyVO reply);

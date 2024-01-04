@@ -71,5 +71,52 @@ public class NoticeController {
 		return "pages/noticedetail";
 	}
 	
+	//특정 게시물 수정삭제 페이지 호출
+	@GetMapping("/noticemodify")
+	public String showNoticeModify(Long cno, Long mno, Model model, 
+								   NoticePagingDTO noticePaging) {
+		
+		NoticeVO notice = noticeService.getNotice2(cno);
+		
+		model.addAttribute(notice);
+		
+		return "pages/noticemodify";
+	}
+	
+	//특정 게시물 수정
+	@PostMapping("/noticemodify")
+	public String modifyNotice(NoticeVO notice,
+							   RedirectAttributes redirectAttr,
+							   NoticePagingDTO noticePaging) {
+		
+		boolean modifyResult = noticeService.modifyNotice(notice);
+		
+		if(modifyResult) {
+			redirectAttr.addAttribute("result", "successModify");
+		
+		}else {
+			redirectAttr.addAttribute("result", "failModify");
+			
+		}
+				
+		redirectAttr.addAttribute("cno", notice.getCno());
+		redirectAttr.addAttribute("pageNum", noticePaging.getPageNum());
+		redirectAttr.addAttribute("rowAmountPerPage", noticePaging.getRowAmountPerPage());
+		redirectAttr.addAttribute("scope", noticePaging.getScope());
+		redirectAttr.addAttribute("keyword", noticePaging.getKeyword());
+		
+		return "redirect:/pages/noticedetail";
+	}		
+	
+	//특정 게시물 삭제
+//	@PostMapping("/noticeremove")
+//	public String removeNotice(NoticeVO notice,
+//							   RedirectAttributes redirectAttr,
+//							   NoticePagingDTO noticePaging) {
+//		
+//		
+//		return "redirect:/pages/noticelist";
+//	}
+	
 	
 }

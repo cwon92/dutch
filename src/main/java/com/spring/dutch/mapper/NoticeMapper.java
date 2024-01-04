@@ -8,10 +8,10 @@ import com.spring.dutch.dto.NoticePagingDTO;
 public interface NoticeMapper {
 
 	//목록조회(READ)
-	public List<NoticeVO> selectNoticeList(NoticePagingDTO noticePaging);
+	public List<NoticeVO> selectNoticeList();
 	
 	//게시물 총수(READ)
-	public long selectNoticeTotal(NoticePagingDTO noticePaging);
+	public long selectNoticeTotal();
 	
 	//특정게시물조회: 하나의 데이터만 가져옴1
 	public NoticeVO selectNotice(Long cno);

@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.dutch.domain.NoticeVO;
-import com.spring.dutch.dto.NoticePagingCreatorDTO;
-import com.spring.dutch.dto.NoticePagingDTO;
 import com.spring.dutch.mapper.NoticeMapper;
 
 @Service
@@ -22,7 +20,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	//공지사항 목록 조회
 	@Override
-	public NoticePagingCreatorDTO getNoticeList(NoticePagingDTO noticePaging) {
+	public List<NoticeVO> getNoticeList() {
 		
 //		long rowTotal = noticeMapper.selectNoticeTotal(noticePaging);
 //		
@@ -33,9 +31,7 @@ public class NoticeServiceImpl implements NoticeService{
 //		
 //		return pagingCreator;
 		
-		return new NoticePagingCreatorDTO(noticeMapper.selectNoticeTotal(noticePaging),
-										  noticePaging,
-										  noticeMapper.selectNoticeList(noticePaging));
+		return noticeMapper.selectNoticeList();
 	}
 
 	//공지사항 등록

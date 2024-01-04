@@ -11,7 +11,7 @@ public class NoticePagingDTO {
 
 	private int pageNum; //페이징번호
 	private int rowAmountPerPage; //표시행수
-	private String scope; //검색범위검색범위(scope - btitle: T, bcontent: C, bwriter: W)
+	private String scope; //검색범위검색범위(scope - ctitle: T, ccontent: C)
 	private String keyword; //검색어
 	
 	//마이바티스 Setter

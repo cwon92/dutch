@@ -34,9 +34,9 @@
                 <div class="panel-body">
                 
                 
-<form class="form-inline" id="frmSendValue" name="frmSendValue" action="${contextPath }/pages/noticelist" method="get" >
+<%-- <form class="form-inline" id="frmSendValue" name="frmSendValue" action="${contextPath }/pages/noticelist" method="get" >
 	<div class="form-group">
-		<label class="sr-only">frmSendValues</label>
+		<label class="sr-only">frmSendValues</label> --%>
 <%-- 	<select class="form-control" id="selectAmount" name="rowAmountPerPage">
 			<option value="10" ${(pagingCreator.myboardPaging.rowAmountPerPage == 10) ? "selected" : "" }>10개</option>
 			<option value="20" ${(pagingCreator.myboardPaging.rowAmountPerPage == 20) ? "selected" : "" }>20개</option>
@@ -54,7 +54,7 @@
 		</select> 
 --%>		
 		
-		<div class="input-group"><!-- 검색어 입력 -->
+		<%-- <div class="input-group"><!-- 검색어 입력 -->
 			<input class="form-control" id="keyword" name="keyword" type="text" 
 			       placeholder="검색어를 입력하세요"
 				   value='<c:out value="${noticeCreator.noticePaging.keyword}" />' />
@@ -70,13 +70,13 @@
 				<span class="glyphicon glyphicon-remove"></span>
 			</button>
 		</div>
-	</div>
+	</div> --%>
 	
-	<input type="hidden" id="pageNum" name="pageNum" value="${noticeCreator.noticePaging.pageNum }" ><%-- 
-	<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${pagingCreator.myboardPaging.rowAmountPerPage }" > --%>
+	<%-- <input type="hidden" id="pageNum" name="pageNum" value="${noticeCreator.noticePaging.pageNum }" >
+	<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${pagingCreator.myboardPaging.rowAmountPerPage }" >
 	<input type="hidden" id="lastPageNum" name="lastPageNum" value="${noticeCreator.lastPageNum }" >
-	
-</form>                
+	 --%>
+<!-- </form>  -->               
 <hr>     
                
                     <table class="table table-striped table-bordered table-hover" 
@@ -87,22 +87,14 @@
                                 <th>제목</th>
                                 <th>회원번호</th>
                                 <th>작성일</th>
-                                <th>수정일</th>
                             </tr>
                         </thead>
                         <tbody>
 
 <c:choose>
-<c:when test="${not empty noticeCreator.noticeList }">
-	<c:forEach var="myboard" items="${noticeCreator.noticeList}">
-		<c:choose>
-			<c:when test="${notice.cdelFlag == 1 }">
-				<tr style="background-color: Moccasin; text-align: center">
-				    <td>${notice.cno }</td>
-				    <td colspan="6"><em>작성자에 의해서 삭제된 게시글입니다.</em></td>
-				</tr>
-			</c:when>
-			<c:otherwise>
+<c:when test="${not empty noticeCreator}">
+	<c:forEach var="notice" items="${noticeCreator}">
+
 				<tr class="moveDetail" data-bno="${notice.cno }">
 					<td><c:out value="${notice.cno }"/></td><%-- 
 					<td style="text-align: left"><a href="${contextPath }/myboard/detail?bno=${myboard.bno}" ><c:out value="${myboard.btitle }"/></a></td> --%>
@@ -112,10 +104,7 @@
 					</td>
 					<td>${notice.mno }</td>
 					<td class="center"><fmt:formatDate value="${notice.cregDate }" pattern="yyyy/MM/dd HH:mm:ss"/></td>
-					<td class="center"><fmt:formatDate value="${notice.cmodDate }" pattern="yyyy/MM/dd HH:mm:ss"/></td>
 				 </tr>
-			</c:otherwise>
-		</c:choose>
 	</c:forEach>
 </c:when>
 <c:otherwise>
@@ -127,7 +116,7 @@
 
                         </tbody>
                     </table><%-- /.table-responsive --%>
-<div style="text-align: center;">
+<%-- <div style="text-align: center;">
 	<ul class="pagination pagination-sm" >
 		<c:if test="${noticeCreator.prev }">
 			<li class="pagination-button">
@@ -168,7 +157,7 @@
 		
 	  
 	</ul>
-</div>
+</div> --%>
 
                     
                     

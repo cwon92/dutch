@@ -1,5 +1,7 @@
 package com.spring.dutch.service;
 
+import java.util.List;
+
 import com.spring.dutch.domain.NoticeVO;
 import com.spring.dutch.dto.NoticePagingCreatorDTO;
 import com.spring.dutch.dto.NoticePagingDTO;
@@ -7,7 +9,7 @@ import com.spring.dutch.dto.NoticePagingDTO;
 public interface NoticeService {
 
 	//공지사항 목록조회(READ)
-	public NoticePagingCreatorDTO getNoticeList(NoticePagingDTO boardPaging);
+	public List<NoticeVO> getNoticeList();
 	
 	//공지사항 등록(CREATE)
 	public long registerNotice(NoticeVO notice);

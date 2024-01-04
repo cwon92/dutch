@@ -1,5 +1,7 @@
 package com.spring.dutch.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +29,11 @@ public class NoticeController {
 	
 	//목록 조회
 	@GetMapping("/noticelist")
-	public String showNoticeList(NoticePagingDTO noticePaging, Model model) {
+	public String showNoticeList(Model model) {
 		
-		NoticePagingCreatorDTO noticeCreator = noticeService.getNoticeList(noticePaging);
+		List<NoticeVO> noticeCreator = noticeService.getNoticeList();
 		
-		model.addAttribute(noticeCreator);
+		model.addAttribute("noticeCreator", noticeCreator);
 		
 		return "pages/noticelist";
 	}

@@ -25,7 +25,7 @@ public class MemberVO {
 	private String password;
 	private long hp;
 	private long cellphone;
-	private Timestamp regDate;
+	private String regDate;
 	private Timestamp modDate;
 	private int delFlag;
 	private String loginType;

@@ -1,0 +1,14 @@
+package com.spring.dutch.service;
+
+import java.util.List;
+
+import com.spring.dutch.domain.MemberVO;
+
+public interface MypageService {
+
+	//회원정보 가져오기
+	public MemberVO getMemberData (long mno) ;
+	
+	//회원정보 수정 (UPDATE)
+	public boolean modifyMember(MemberVO member);
+}

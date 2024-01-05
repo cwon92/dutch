@@ -24,42 +24,47 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
 					<div class="row">
-						<div class="col-md-6" style="font-size:20px; height: 45px; padding-top:10px;">목록</div>
+						<div class="col-md-6" style="font-size:20px; height: 45px; padding-top:10px;">문의 목록</div>
 						<div class="col-md-6" style="padding-top:8px;">
-							<button type="button" id="btnToRegister" class="btn btn-primary btn-sm pull-right">새글 등록</button>
+							<button type="button" id="btnToRegister" class="btn btn-primary btn-sm pull-right">새 문의 등록</button>
 						</div>
 					</div>
 				</div><%-- /.panel-heading --%>
                 
-                <div class="panel-body">            
-			<hr>   
-     <table class="table table-striped table-bordered table-hover" 
-            style="width:100%;text-align: center;">
-         <thead>
-             <tr>
-                 <th>글번호</th>
-                 <th>제목</th>
-                 <th>회원번호</th>
-                 <th>작성일</th>
-                 <th>수정일</th>
-             </tr>
-         </thead>
-         <tbody>
+                <div class="panel-body"> 
+	
+	<input type="hidden" id="pageNum" name="pageNum" value="${qnaCreator.qnaPaging.pageNum }" > 
+	<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${qnaCreator.qnaPaging.rowAmountPerPage }" >
+	<input type="hidden" id="lastPageNum" name="lastPageNum" value="${qnaCreator.lastPageNum }" >
+               
+<hr>     
+               
+                    <table class="table table-striped table-bordered table-hover" 
+                           style="width:100%;text-align: center;">
+                        <thead>
+                            <tr>
+                                <th>글번호</th>
+                                <th>제목</th>
+                                <th>회원번호</th>
+                                <th>작성일</th>
+                                <th>수정일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
 <c:choose>
-<c:when test="${not empty qnaCreator.qnaList}">
-	<c:forEach var="notice" items="${qnaCreator.qnaList}">
-		 <c:choose>
+<c:when test="${not empty qnaCreator.qnaList }">
+	<c:forEach var="qna" items="${qnaCreator.qnaList}">
+		<c:choose>
 			<c:when test="${qna.qdelFlag == 1 }">
 				<tr style="background-color: Moccasin; text-align: center">
 				    <td>${qna.qno }</td>
 				    <td colspan="6"><em>작성자에 의해서 삭제된 게시글입니다.</em></td>
 				</tr>
-			</c:when> 
+			</c:when>
 			<c:otherwise>
 				<tr class="moveDetail" data-bno="${qna.qno }">
-					<td><c:out value="${qna.qno }"/></td><%-- 
-					<td style="text-align: left"><a href="${contextPath }/myboard/detail?bno=${myboard.bno}" ><c:out value="${myboard.btitle }"/></a></td> --%>
+					<td><c:out value="${qna.qno }"/></td>
 					<td style="text-align: left">
 						<c:out value="${qna.qtitle }"/>
 						<%-- <small>[댓글수: <strong><c:out value="${myboard.breplyCnt}"/></strong>]</small> --%>
@@ -68,8 +73,8 @@
 					<td class="center"><fmt:formatDate value="${qna.qregDate }" pattern="yyyy/MM/dd HH:mm:ss"/></td>
 					<td class="center"><fmt:formatDate value="${qna.qmodDate }" pattern="yyyy/MM/dd HH:mm:ss"/></td>
 				 </tr>
-			 </c:otherwise>
-		</c:choose> 
+			</c:otherwise>
+		</c:choose>
 	</c:forEach>
 </c:when>
 <c:otherwise>
@@ -81,7 +86,7 @@
 
                         </tbody>
                     </table><%-- /.table-responsive --%>
- <div style="text-align: center;">
+<div style="text-align: center;">
 	<ul class="pagination pagination-sm" >
 		<c:if test="${qnaCreator.prev }">
 			<li class="pagination-button">
@@ -92,7 +97,7 @@
 		</c:if>
 		<c:if test="${qnaCreator.prev }">
 			<li class="pagination-button">
-				<a href="${qnaCreator.startPagingNum - 1 }" aria-label="Previous">
+				<a href="${qnaCreator.qnaPaging - 1 }" aria-label="Previous">
 					<span aria-hidden="true">이전</span>
 				</a>
 			</li>
@@ -122,7 +127,7 @@
 		
 	  
 	</ul>
-</div> 
+</div>
 
                     
                     
@@ -147,6 +152,7 @@ $("#btnToRegister").on("click", function(){
 
 <%-- 상세페이지 이동 --%>
 $(".moveDetail").on("click", function(){
+	var qno = $(this).data("qno");
 	
 	frmSendValue.append("<input type='hidden' name='qno' value='" + qno + "'/>")
 	frmSendValue.attr("action", "${contextPath}/pages/qnadetail").attr("method", "get") ;
@@ -156,8 +162,6 @@ $(".moveDetail").on("click", function(){
 });
 
 <%-- 페이지징 처리: 검색 목록 페이지 이동 --%>
-
-
 
 </script>
 

@@ -37,7 +37,7 @@ public class QnaController {
 //	}
 	
 	@GetMapping("/qnalist")
-	public String ShowQnaList(QnaPagingDTO qnaPaging, Model model) {
+	public String showQnaList(QnaPagingDTO qnaPaging, Model model) {
 		
 		System.out.println("qnaPaging: " + qnaPaging);
 		QnaPagingCreatorDTO qnaCreator = qnaService.getQnaList(qnaPaging);

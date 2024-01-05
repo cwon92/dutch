@@ -24,7 +24,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
 					<div class="row">
-						<div class="col-md-6" style="font-size:20px; height: 45px; padding-top:10px;">공지사항 목록</div>
+						<div class="col-md-6" style="font-size:20px; height: 45px; padding-top:10px;">공지사항</div>
 						<div class="col-md-6" style="padding-top:8px;">
 							<button type="button" id="btnToRegister" class="btn btn-primary btn-sm pull-right">새글 등록</button>
 						</div>
@@ -77,20 +77,19 @@
 	<input type="hidden" id="lastPageNum" name="lastPageNum" value="${noticeCreator.lastPageNum }">
 	 
 <!-- </form>  -->               
-<hr>     
-               
-                    <table class="table table-striped table-bordered table-hover" 
-                           style="width:100%;text-align: center;">
-                        <thead>
-                            <tr>
-                                <th>글번호</th>
-                                <th>제목</th>
-                                <th>회원번호</th>
-                                <th>작성일</th>
-                                <th>조회수</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+<hr>  
+		<table class="table table-striped table-bordered table-hover" 
+		       style="width:100%;text-align: center;">
+		<thead>
+		    <tr>
+		        <th>글번호</th>
+		        <th>제목</th>
+		        <th>회원번호</th>
+		        <th>작성일</th>
+		        <th>조회수</th>
+		    </tr>
+		</thead>
+		<tbody>
 
 <c:choose>
 <c:when test="${not empty noticeCreator.noticeList}">

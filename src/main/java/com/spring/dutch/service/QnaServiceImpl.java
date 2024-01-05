@@ -20,13 +20,13 @@ public class QnaServiceImpl implements QnaService{
 	
 	//QNA 목록조회
 //	@Override
-//	public List<QnaVO> getQnaList() {
+//	public List<QnaVO> getQnaList(QnaPagingDTO qnaPaging) {
 //		
 ////		return new QnaPagingCreatorDTO(qnaMapper.selectQnaTotal(),
 ////								       qnaPaging,
 ////								       qnaMapper.selectQnaList());
 //		
-//		return qnaMapper.selectQnaList();
+//		return qnaMapper.selectQnaList(qnaPaging);
 //	}
 	
 	@Override

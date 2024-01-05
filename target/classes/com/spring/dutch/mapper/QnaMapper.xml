@@ -5,7 +5,8 @@
 <mapper namespace="com.spring.dutch.mapper.QnaMapper">
 
 <!-- 목록조회 -->
-<!--  	<select id="selectQnaList" resultType="com.spring.dutch.domain.QnaVO">
+<!--
+	<select id="selectQnaList" resultType="com.spring.dutch.domain.QnaVO">
 		SELECT qno, mno, qtitle, qcontent, qregDate, qmodDate, qdelFlag, qdelFlagAdmin, qsignal
 		FROM dutch.tbl_qna
 		ORDER BY qno DESC

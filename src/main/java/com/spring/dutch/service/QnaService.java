@@ -29,6 +29,8 @@ public interface QnaService {
 	
 	//특정 QNA 삭제
 	public boolean removeQna(long qno);
+
+	
 	
 	//첨부파일 목록 조회
 		

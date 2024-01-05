@@ -1,11 +1,11 @@
 package com.spring.dutch.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.dutch.domain.NoticeVO;
+import com.spring.dutch.dto.NoticePagingCreatorDTO;
+import com.spring.dutch.dto.NoticePagingDTO;
 import com.spring.dutch.mapper.NoticeMapper;
 
 @Service
@@ -19,9 +19,9 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	//공지사항 목록 조회
-	@Override
-	public List<NoticeVO> getNoticeList() {
-		
+//	@Override
+//	public List<NoticeVO> getNoticeList(NoticePagingDTO noticePaging) {
+//		
 //		long rowTotal = noticeMapper.selectNoticeTotal(noticePaging);
 //		
 //		List<NoticeVO> noticeList = noticeMapper.selectNoticeList(noticePaging);
@@ -29,9 +29,25 @@ public class NoticeServiceImpl implements NoticeService{
 //		NoticePagingCreatorDTO pagingCreator =
 //				new NoticePagingCreatorDTO(rowTotal, noticePaging, noticeList);
 //		
-//		return pagingCreator;
+//		return noticeList;
+//		
+////		return noticeMapper.selectNoticeList();
+//	}
 		
-		return noticeMapper.selectNoticeList();
+	@Override
+	public NoticePagingCreatorDTO getNoticeList(NoticePagingDTO noticePaging) {
+		
+//		long rowTotal = noticeMapper.selectNoticeTotal(noticePaging);
+//		
+//		List<NoticeVO> noticeList = noticeMapper.selectNoticeList(noticePaging);
+//		
+//		NoticePagingCreatorDTO pagingCreator =
+//				new NoticePagingCreatorDTO(rowTotal, noticePaging, noticeList);
+		
+//		return noticeList;
+		return new NoticePagingCreatorDTO(noticeMapper.selectNoticeTotal(noticePaging), 
+										  noticePaging, 
+										  noticeMapper.selectNoticeList(noticePaging));
 	}
 
 	//공지사항 등록
@@ -81,6 +97,16 @@ public class NoticeServiceImpl implements NoticeService{
 	public boolean removeNotice(long cno) {
 
 		int rows = noticeMapper.deleteNotice(cno);
+		
+		return (rows == 1);
+	}
+
+	//블라인드 처리
+	@Override
+	@Transactional
+	public boolean modifyCdelFlag(long cno) {
+
+		int rows = noticeMapper.updateCdelFlag(cno);
 		
 		return (rows == 1);
 	}

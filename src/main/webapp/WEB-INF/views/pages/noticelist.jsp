@@ -38,23 +38,22 @@
 	<div class="form-group">
 		<label class="sr-only">frmSendValues</label> --%>
 <%-- 	<select class="form-control" id="selectAmount" name="rowAmountPerPage">
-			<option value="10" ${(pagingCreator.myboardPaging.rowAmountPerPage == 10) ? "selected" : "" }>10개</option>
-			<option value="20" ${(pagingCreator.myboardPaging.rowAmountPerPage == 20) ? "selected" : "" }>20개</option>
-			<option value="50" ${(pagingCreator.myboardPaging.rowAmountPerPage == 50) ? "selected" : "" }>50개</option>
-			<option value="100" ${(pagingCreator.myboardPaging.rowAmountPerPage == 100) ? "selected" : "" }>100개</option>
+			<option value="10" ${(noticeCreator.noticePaging.rowAmountPerPage == 10) ? "selected" : "" }>10개</option>
+			<option value="20" ${(noticeCreator.noticePaging.rowAmountPerPage == 20) ? "selected" : "" }>20개</option>
+			<option value="50" ${(noticeCreator.noticePaging.rowAmountPerPage == 50) ? "selected" : "" }>50개</option>
+			<option value="100" ${(noticeCreator.noticePaging.rowAmountPerPage == 100) ? "selected" : "" }>100개</option>
 		</select>
 		
 		<select class="form-control" id="selectScope" name="scope">
-			<option value="" ${(pagingCreator.myboardPaging.scope == null ) ? "selected" : "" }>범위선택</option>
-			<option value="T" ${(pagingCreator.myboardPaging.scope == "T" ) ? "selected" : "" }>제목</option>
-			<option value="C" ${(pagingCreator.myboardPaging.scope == "C" ) ? "selected" : "" }>내용</option>
-			<option value="W" ${(pagingCreator.myboardPaging.scope == "W" ) ? "selected" : "" }>작성자</option>
-			<option value="TC" ${(pagingCreator.myboardPaging.scope == "TC" ) ? "selected" : "" }>제목+내용</option>
-			<option value="TCW" ${(pagingCreator.myboardPaging.scope == "TCW" ) ? "selected" : "" }>제목+내용+작성자</option>
+			<option value="" ${(noticeCreator.noticePaging.scope == null ) ? "selected" : "" }>범위선택</option>
+			<option value="T" ${(noticeCreator.noticePaging.scope == "T" ) ? "selected" : "" }>제목</option>
+			<option value="C" ${(noticeCreator.noticePaging.scope == "C" ) ? "selected" : "" }>내용</option>
+			<option value="TC" ${(noticeCreator.noticePaging.scope == "TC" ) ? "selected" : "" }>제목+내용</option>
+			<option value="TCW" ${(noticeCreator.noticePaging.scope == "TCW" ) ? "selected" : "" }>제목+내용+작성자</option>
 		</select> 
 --%>		
 		
-		<%-- <div class="input-group"><!-- 검색어 입력 -->
+ 		 <div class="input-group"><!-- 검색어 입력 -->
 			<input class="form-control" id="keyword" name="keyword" type="text" 
 			       placeholder="검색어를 입력하세요"
 				   value='<c:out value="${noticeCreator.noticePaging.keyword}" />' />
@@ -70,12 +69,13 @@
 				<span class="glyphicon glyphicon-remove"></span>
 			</button>
 		</div>
-	</div> --%>
+	</div>  
 	
-	<%-- <input type="hidden" id="pageNum" name="pageNum" value="${noticeCreator.noticePaging.pageNum }" >
-	<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${pagingCreator.myboardPaging.rowAmountPerPage }" >
-	<input type="hidden" id="lastPageNum" name="lastPageNum" value="${noticeCreator.lastPageNum }" >
-	 --%>
+	 
+	<input type="hidden" id="pageNum" name="pageNum" value="${noticeCreator.noticePaging.pageNum }" >
+	<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${noticeCreator.noticePaging.rowAmountPerPage }" >
+	<input type="hidden" id="lastPageNum" name="lastPageNum" value="${noticeCreator.lastPageNum }">
+	 
 <!-- </form>  -->               
 <hr>     
                
@@ -87,24 +87,35 @@
                                 <th>제목</th>
                                 <th>회원번호</th>
                                 <th>작성일</th>
+                                <th>조회수</th>
                             </tr>
                         </thead>
                         <tbody>
 
 <c:choose>
-<c:when test="${not empty noticeCreator}">
-	<c:forEach var="notice" items="${noticeCreator}">
-
+<c:when test="${not empty noticeCreator.noticeList}">
+	<c:forEach var="notice" items="${noticeCreator.noticeList}">
+		<c:choose>
+			<c:when test="${notice.cdelFlag == 1 }">
+				<tr style="background-color: Moccasin; text-align: center">
+				    <td>${notice.cno }</td>
+				    <td colspan="6"><em>작성자에 의해서 삭제된 게시글입니다.</em></td>
+				</tr>
+			</c:when>
+			<c:otherwise>		
 				<tr class="moveDetail" data-bno="${notice.cno }">
-					<td><c:out value="${notice.cno }"/></td><%-- 
-					<td style="text-align: left"><a href="${contextPath }/myboard/detail?bno=${myboard.bno}" ><c:out value="${myboard.btitle }"/></a></td> --%>
+					<td><c:out value="${notice.cno }"/></td>
 					<td style="text-align: left">
 						<c:out value="${notice.ctitle }"/>
 						<%-- <small>[댓글수: <strong><c:out value="${myboard.breplyCnt}"/></strong>]</small> --%>
 					</td>
 					<td>${notice.mno }</td>
 					<td class="center"><fmt:formatDate value="${notice.cregDate }" pattern="yyyy/MM/dd HH:mm:ss"/></td>
+				 	<td class="center"><c:out value="${notice.cviewCnt }"/></td>
+				 
 				 </tr>
+			</c:otherwise>
+		</c:choose>
 	</c:forEach>
 </c:when>
 <c:otherwise>
@@ -116,7 +127,7 @@
 
                         </tbody>
                     </table><%-- /.table-responsive --%>
-<%-- <div style="text-align: center;">
+ <div style="text-align: center;">
 	<ul class="pagination pagination-sm" >
 		<c:if test="${noticeCreator.prev }">
 			<li class="pagination-button">
@@ -157,7 +168,7 @@
 		
 	  
 	</ul>
-</div> --%>
+</div> 
 
                     
                     
@@ -172,10 +183,116 @@
 
 <script>
 
-/* var frmSendValue = $("#frmSendValue"); */
+var frmSendValue = $("#frmSendValue");
+var result = '<c:out value="${result}" />' ;
+
+<%-- 등록페이지 이동 --%>
+$("#btnToRegister").on("click", function(){
+	window.location.href = "${contextPath}/pages/noticeregister" ;
+});
+
+
+<%-- 상세페이지 이동 --%>
+$(".moveDetail").on("click", function(){
+	var cno = $(this).data("cno");
+	
+	frmSendValue.append("<input type='hidden' name='cno' value='" + cno +"'/>");
+	frmSendValue.attr("action", "${contextPath}/pages/noticedetail").attr("method", "get") ;
+	frmSendValue.submit() ;
+	frmSendValue.find('input[name="cno"]').remove() ;  	//웹 브라우저 뒤로가기 후, 다른 게시물 상세 이동 시에
+														//bno값이 계속 url에 추가되는 현상 해결
+});
+
+<%-- 모달 호출 함수 --%>
+<%--
+function runModal(result) {
+	
+	if (result.length == 0) {
+		return ;
+	
+	} else if ( result == "successRemove" ) {
+		var myMsg =  "게시글이 삭제되었습니다. " ;
+		
+	} else if ( parseInt(result) > 0 ) {
+		var myMsg =  result + "번 게시글이 등록되었습니다. "
+	
+	} 
+
+	
+	//$(".modal-body").html(myMsg) ;
+	$("#yourModal-body").html(myMsg) ;
+	
+	$("#yourModal").modal("show") ;
+	
+	myMsg = "" ;
+}
+--%>
 
 <%-- 페이지징 처리: 검색 목록 페이지 이동 --%>
+/* $("li.pagination-button a").on("click", function(e){
+	e.preventDefault() ;
+	frmSendValue.find("input[name='pageNum']").val($(this).attr("href")) ;
+	console.log(frmSendValue.find("input[name='pageNum']").val());
+	frmSendValue.attr("action", "${contextPath}/pages/noticelist") ;
+	frmSendValue.attr("method", "get") ;
+	
+	frmSendValue.submit() ;
+	
+}); */
 
+<%--표시행수 변경 이벤트 처리--%>
+$("#selectAmount").on("change", function(){
+	frmSendValue.find("input[name='pageNum']").val(1) ;
+	frmSendValue.submit() ;
+} );
+
+<%--키워드 검색버튼 클릭 이벤트 처리 --%>
+/*$("#btnSearchGo").on("click", function() {
+   
+   var keyword = $("#keyword").val() ;
+   
+   if(!keyword || keyword.length == 0){
+      alert("검색어를 입력해주세요.");
+      return ;      
+   }
+   
+   frmSendValue.find("input[name='pageNum']").val(1);
+   frmSendValue.submit();
+});
+
+ $("#selectScope").on("change", function(){
+	
+	var keyword = $("#keyword").val() ;
+	   
+	if(keyword || keyword.length != 0){
+		$("#pageNum").val(1) ;
+		frmSendValue.submit() ;      
+	} 
+
+});*/
+
+<%--검색초기화 버튼 이벤트처리, 버튼 초기화 시, 1페이지에 목록 정보 다시 표시 --%>
+/* $("#btnReset").on("click", function(){
+	$("#selectAmount").val(10) ;
+    $("#selectScope").val("") ; 
+	$("#keyword").val("") ;
+	$("#pageNum").val(1) ;
+	
+	frmSendValue.submit() ;
+
+});
+
+$(document).ready(function(){
+	runModal(result) ;
+	
+	window.addEventListener("popstate", function(event){
+		history.pushState(null, null, location.href) ;
+		
+	});
+	
+	history.pushState(null, null, location.href) ;
+	
+}); */
 
 
 </script>

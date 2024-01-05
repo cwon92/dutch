@@ -19,12 +19,26 @@ public class QnaServiceImpl implements QnaService{
 	}
 	
 	//QNA 목록조회
+//	@Override
+//	public List<QnaVO> getQnaList() {
+//		
+////		return new QnaPagingCreatorDTO(qnaMapper.selectQnaTotal(),
+////								       qnaPaging,
+////								       qnaMapper.selectQnaList());
+//		
+//		return qnaMapper.selectQnaList();
+//	}
+	
 	@Override
 	public QnaPagingCreatorDTO getQnaList(QnaPagingDTO qnaPaging) {
 		
-		return new QnaPagingCreatorDTO(qnaMapper.selectQnaTotal(qnaPaging),
-								       qnaPaging,
-								       qnaMapper.selectQnaList(qnaPaging));
+//		return new QnaPagingCreatorDTO(qnaMapper.selectQnaTotal(),
+//								       qnaPaging,
+//								       qnaMapper.selectQnaList());
+		
+		return new QnaPagingCreatorDTO(qnaMapper.selectQnaTotal(qnaPaging), 
+									   qnaPaging,
+									   qnaMapper.selectQnaList(qnaPaging));
 	}
 
 	//QNA 등록
@@ -40,7 +54,7 @@ public class QnaServiceImpl implements QnaService{
 	//QNA 조회: 특정 QNA 하나의 데이터를 가져옴
 	@Override
 	@Transactional
-	public QnaVO getQna(long qno, String result) {
+	public QnaVO getQna(long qno) {
 
 		QnaVO qna = qnaMapper.selectQna(qno);
 		
@@ -73,6 +87,15 @@ public class QnaServiceImpl implements QnaService{
 	public boolean removeQna(long qno) {
 
 		int rows = qnaMapper.deleteQna(qno);
+		
+		return (rows == 1);
+	}
+
+	@Override
+	@Transactional
+	public boolean modifyQdelFlagAdmin(long qno) {
+		
+		int rows = qnaMapper.updateQdelFlagAdmin(qno);
 		
 		return (rows == 1);
 	}

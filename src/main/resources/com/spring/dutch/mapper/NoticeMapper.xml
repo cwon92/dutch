@@ -5,39 +5,42 @@
 <mapper namespace="com.spring.dutch.mapper.NoticeMapper">
 
 <!-- 목록조회(READ) -->
- 	<select id="selectNoticeList" resultType="com.spring.dutch.domain.NoticeVO">
+<!--   	<select id="selectNoticeList" resultType="com.spring.dutch.domain.NoticeVO">
 		SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory
 		FROM dutch.tbl_notice
 		ORDER BY cno DESC
+	</select> -->
+	
+	<select id="selectNoticeList" resultType="com.spring.dutch.domain.NoticeVO"
+	        parameterType="com.spring.dutch.dto.NoticePagingDTO">
+	<![CDATA[
+		SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory, cdelFlag
+		FROM ( SELECT /*+ INDEX_DESC (a FK_NOTICE_MNO) */ ROWNUM rn, a.* 
+		       FROM dutch.tbl_notice a
+		       WHERE ROWNUM <= (#{pageNum} * #{rowAmountPerPage})
+		      )
+		WHERE rn >= ((#{pageNum} * #{rowAmountPerPage}) - (#{rowAmountPerPage} - #{pageNum}))
+	]]>
 	</select>
 
-<!-- 목록조회(페이징고려)
-	<select id="selectNoticeList" resultType="com.spring.dutch.domain.NoticeVO"
-			parameterType="com.spring.dutch.dto.NoticePagingDTO">
-		<![CDATA[
-			SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory 
-			FROM ( SELECT /*+ INDEX_DESC (a FK_NOTICE_MNO) */ ROWNUM rn, a.* 
-			       FROM dutch.tbl_notice a
-			       WHERE 
-		]]>	  
-		<trim prefix="(" suffix=") AND" prefixOverrides="OR" >
-			<foreach item='scope' collection="myScopeArr">
-				<trim prefix="OR">
-					<choose>
-						<when test="scope == 'T'.toString()">btitle LIKE '%'||#{keyword}||'%'</when>
-						<when test="scope == 'C'.toString()">bcontent LIKE '%'||#{keyword}||'%'</when>
-					</choose>
-				</trim> 
-			</foreach>
-		</trim>	 
-		     
-		<![CDATA[	       
-			       ROWNUM <= (#{pageNum} * #{rowAmountPerPage})
-			       )
-			 WHERE rn >= ((#{pageNum} * #{rowAmountPerPage}) - (#{rowAmountPerPage} - 1)) 
-		]]>
-	</select>
- -->
+<!-- 목록조회(페이징고려) -->
+<!-- 	<select id="selectNoticeList" resultType="com.spring.dutch.domain.NoticeVO"
+	        parameterType="com.spring.dutch.dto.NoticePagingDTO">
+	<![CDATA[
+		SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory
+		FROM ( SELECT /*+ INDEX_DESC (a fk_notice_mno) */ ROWNUM rn, a.* 
+               FROM dutch.tbl_notice a
+               WHERE
+	]]>
+
+	<![CDATA[      			       
+			       ROWNUM <= (#{pageNum} * #{rowAmountPerPages})
+			      )
+			WHERE rn > = ((#{pageNum} * #{rowAmountPerPages}) - (#{rowAmountPerPages} - 1 ))
+	]]>
+
+	</select> -->
+
  
 <!-- 총 개수 조회(페이징) -->
 	<select id="selectNoticeTotal" resultType="long">
@@ -50,19 +53,20 @@
 			SELECT dutch.tbl_notice.nextval FROM dual
 		</selectKey>
 		INSERT INTO dutch.tbl_notice 
-		VALUES (#{cno}
+		VALUES (#{cno} ,
 				#{mno} ,
 				#{ctitle},
 				#{cregDate},
 				#{cviewCnt},
 				#{ccontent},
-				#{ccategory}
+				#{ccategory},
+				#{cdelFlag}
 				)
 	</insert>
 
 <!-- 특정 게시물 조회 :글번호로 조회-->
 	<select id="selectNotice" resultType="com.spring.dutch.domain.NoticeVO">
-		SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory
+		SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory, cdelFlag
 		FROM dutch.tbl_notice
 		WHERE cno = #{cno}
 	</select>
@@ -72,6 +76,13 @@
 		UPDATE dutch.tbl_notice
 		SET ctitle = #{ctitle} ,
 		    ccontent = #{ccontent} 
+		WHERE cno = #{cno}
+	</update>
+	
+<!-- 삭제요청 -->
+	<update id="updateCdelFlag" parameterType="com.spring.dutch.domain.NoticeVO">
+		UPDATE dutch.tbl_notice
+		SET cdelFlag =1
 		WHERE cno = #{cno}
 	</update>
 

@@ -9,7 +9,8 @@ import com.spring.dutch.dto.NoticePagingDTO;
 public interface NoticeService {
 
 	//공지사항 목록조회(READ)
-	public List<NoticeVO> getNoticeList();
+//	public List<NoticeVO> getNoticeList(NoticePagingDTO noticePaging);
+	public NoticePagingCreatorDTO getNoticeList(NoticePagingDTO noticePaging);
 	
 	//공지사항 등록(CREATE)
 	public long registerNotice(NoticeVO notice);
@@ -22,6 +23,9 @@ public interface NoticeService {
 	
 	//특정 게시물 수정(UPDATE)
 	public boolean modifyNotice(NoticeVO notice);
+	
+	//특정 게시물 삭제요청
+	public boolean modifyCdelFlag(long cno);
 	
 	//특정 게시물 삭제(DELETE)
 	public boolean removeNotice(long cno);

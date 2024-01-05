@@ -18,13 +18,13 @@ public class NoticePagingCreatorDTO {
 	private boolean prev;
 	private boolean next;
 	private long rowTotal; //행의 총 개수
-	private int pagingNumCnt; //기본 5
+	private int pagingNumCnt; //기본 10
 	private int lastPageNum;
 	private List<NoticeVO> noticeList;
 	
 	public NoticePagingCreatorDTO(long rowTotal,
-								 NoticePagingDTO noticePaging,
-							     List<NoticeVO> noticeList) {
+								  NoticePagingDTO noticePaging,
+							      List<NoticeVO> noticeList) {
 		this.rowTotal = rowTotal;
 		this.noticePaging = noticePaging;
 		this.noticeList = noticeList;

@@ -5,10 +5,28 @@
 <mapper namespace="com.spring.dutch.mapper.QnaMapper">
 
 <!-- 목록조회 -->
-	<select id="selectQnaList" resultType="com.spring.dutch.domain.QnaVO">
+<!--  	<select id="selectQnaList" resultType="com.spring.dutch.domain.QnaVO">
 		SELECT qno, mno, qtitle, qcontent, qregDate, qmodDate, qdelFlag, qdelFlagAdmin, qsignal
 		FROM dutch.tbl_qna
-		ORDER BY #{qno } DESC
+		ORDER BY qno DESC
+	</select> -->
+	
+<!-- 목록조회(페이징고려) -->
+ 	<select id="selectQnaList" resultType="com.spring.dutch.domain.QnaVO"
+			parameterType="com.spring.dutch.dto.QnaPagingDTO">
+	<![CDATA[
+		SELECT qno, mno, qtitle, qcontent, qregDate, qmodDate, qdelFlag, qdelFlagAdmin, qsignal
+		FROM ( SELECT /*+ INDEX_DESC (a FK_QNA_MNO) */ ROWNUM rn, a.*
+		       FROM dutch.tbl_qna a
+		       WHERE ROWNUM <= (#{pageNum} * #{rowAmountPerPage})
+		      )
+		WHERE rn >= ((#{pageNum} * #{rowAmountPerPage}) - (#{rowAmountPerPage} - #{pageNum}))
+	]]>
+	</select>
+	
+<!-- 총 개수 조회(페이징) -->
+	<select id="selectQnaTotal" resultType="long">
+		SELECT count(*) rowtotal FROM dutch.tbl_qna
 	</select>
 
 <!-- 등록 -->
@@ -17,7 +35,8 @@
 			dutch.seq_qna.NEXTVAL FROM dual
 		</selectKey>
 		INSERT INTO dutch.tbl_qna 
-		VALUES (#{mno } , 
+		VALUES (#{qno} ,
+				#{mno } , 
 				#{qtitle }, 
 				#{qcontent }, 
 				DEFAULT,DEFAULT, DEFAULT, DEFAULT,DEFAULT )

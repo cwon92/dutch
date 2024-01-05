@@ -15,9 +15,10 @@ public interface QnaMapper {
 	//게시물총수(READ)
 	public long selectQnaTotal(QnaPagingDTO qnaPaging);
 	
-	//특정게시물조회
+	//특정게시물조회: 하나의 데이터만 가져옴1
 	public QnaVO selectQna(Long qno);
 	
+	//특정게시물조회2
 	public QnaVO selectQna2(Long qno);
 	
 	//등록(CREATE)

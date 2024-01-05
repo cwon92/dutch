@@ -11,13 +11,8 @@ public class NoticePagingDTO {
 
 	private int pageNum; //페이징번호
 	private int rowAmountPerPage; //표시행수
-	private String scope; //검색범위검색범위(scope - ctitle: T, ccontent: C)
+	//private String scope; //검색범위검색범위
 	private String keyword; //검색어
-	
-	//마이바티스 Setter
-	public String[] getScopeArr() {
-		return scope == null ? new String[] {} : scope.split("");
-	}
 	
 	//목록에서 표시할 행수 선택하고 페이징 번호 클릭시 전달
 	public NoticePagingDTO(Integer pageNum, Integer rowAmountPerPage) {

@@ -22,6 +22,7 @@ public class NoticeVO {
 	private int cviewCnt; //조회수
 	private String ccontent; //내용
 	private String ccategory; //카테고리
+	private int cdelFlag; //삭제요청
 	
 	/*
 	cno number(10,0) primary key,--리스트고유번호

@@ -19,14 +19,13 @@ public class QnaPagingCreatorDTO {
 	private boolean prev;
 	private boolean next;
 	private long rowTotal; //행의 총 개수
-	private int pagingNumCnt; //기본 5
+	private int pagingNumCnt; //기본 10
 	private int lastPageNum;
-	private List<NoticeVO> noticeList;
 	private List<QnaVO> qnaList;
 	
 	public QnaPagingCreatorDTO(long rowTotal,
-								 QnaPagingDTO qnaPaging,
-							 	 List<QnaVO> qnaList) {
+							   QnaPagingDTO qnaPaging,
+							   List<QnaVO> qnaList) {
 		this.rowTotal = rowTotal;
 		this.qnaPaging = qnaPaging;
 		this.qnaList = qnaList;

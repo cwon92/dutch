@@ -140,6 +140,7 @@
 
 </div><%-- /#page-wrapper --%>
 
+<%-- 리스트 자바스크립트 시작 --%>
 <script>
 
 var frmSendValue = $("#frmSendValue");

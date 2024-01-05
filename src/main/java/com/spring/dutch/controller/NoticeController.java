@@ -1,7 +1,6 @@
 package com.spring.dutch.controller;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,16 +15,30 @@ import com.spring.dutch.dto.NoticePagingCreatorDTO;
 import com.spring.dutch.dto.NoticePagingDTO;
 import com.spring.dutch.service.NoticeService;
 
+import lombok.Setter;
+
 @Controller
 @RequestMapping("/pages")
 public class NoticeController {
 
+//	@Setter(onMethod_ = @Autowired )
 	private NoticeService noticeService;
 	
 	//단일 생성자를 이용한 주입
 	public NoticeController(NoticeService noticeService) {
 		this.noticeService = noticeService;
+		System.out.println("MyBoardController의 모든 필드 초기화 생성자 입니다.");
 	}
+	
+////  (Setter를 이용한 주입) 
+//	public NoticeController() {
+//		System.out.println("MyBoardController의 기본 생성자 입니다.");
+//	}
+//	
+//	@Autowired
+//	public void setMyBoardService(NoticeService noticeService) {
+//		this.noticeService = noticeService ;
+//	}
 	
 	
 	//목록 조회
@@ -56,6 +69,7 @@ public class NoticeController {
 	//@PreAuthorize("isAuthenticated()")
 	public String showNoticeRegisterPage() {
 		
+		System.out.println("등록페이지 호출");
 		return "pages/noticeregister";
 	}
 	
@@ -65,9 +79,10 @@ public class NoticeController {
 	public String registerNotice(NoticeVO notice, 
 								 RedirectAttributes redirectAttr) {
 		
-		long cno = noticeService.registerNotice(notice);
+		Long cno = noticeService.registerNotice(notice);
 		
 		redirectAttr.addFlashAttribute("result", cno);
+		System.out.println("result: " + redirectAttr.getFlashAttributes());
 		
 		return "redirect:/pages/noticelist";
 	}
@@ -79,10 +94,15 @@ public class NoticeController {
 		
 		NoticeVO notice = null;
 		
+		System.out.println("Detail.jsp-수정삭제 후: result: " + result) ;
+		System.out.println("Detail.jsp-수정삭제 후: cno: " + cno);
+		
 		notice = noticeService.getNotice(cno, result);
 		
 		model.addAttribute(notice);
 		model.addAttribute(result);
+		
+		System.out.println("model: " + model);
 		
 		return "pages/noticedetail";
 	}

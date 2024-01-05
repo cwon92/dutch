@@ -14,10 +14,10 @@ public interface NoticeMapper {
 	public long selectNoticeTotal(NoticePagingDTO noticePaging);
 	
 	//특정게시물조회: 하나의 데이터만 가져옴1
-	public NoticeVO selectNotice(Long cno);
+	public NoticeVO selectNotice(long cno);
 	
 	//특정게시물조회2
-	public NoticeVO selectNotice2(Long cno);
+	public NoticeVO selectNotice2(long cno);
 	
 	//등록(CREATE)
 	public int insertNotice(NoticeVO notice);
@@ -26,10 +26,10 @@ public interface NoticeMapper {
 	public int updateNotice(NoticeVO notice);
 	
 	//삭제요청
-	public int updateCdelFlag(Long cno);
+	public int updateCdelFlag(long cno);
 
 	//삭제(DELETE)
-	public int deleteNotice(Long cno); 
+	public int deleteNotice(long cno); 
 	
 	//조회수증가(+1씩 증가/ UPDATE)
 	public int updateCviewCnt(long cno);

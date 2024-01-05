@@ -1,5 +1,6 @@
 package com.spring.dutch.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,19 @@ public class NoticeServiceImpl implements NoticeService{
 		this.noticeMapper = noticeMapper;
 	}
 
+	//방법1:Setter 이용
+	public NoticeServiceImpl() {
+		System.out.println("NoticeServiceImpl의 기본생성자입니다.");
+	}
+	
+	@Autowired
+	public void setMyBoardMapper(NoticeMapper noticeMapper) {
+		this.noticeMapper = noticeMapper;
+		System.out.println("NoticeServiceImpl의 NoticeMapper의 Setter입니다.");	
+	}
+	
+	
+	
 	//공지사항 목록 조회
 //	@Override
 //	public List<NoticeVO> getNoticeList(NoticePagingDTO noticePaging) {
@@ -54,6 +68,18 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	@Transactional
 	public long registerNotice(NoticeVO notice) {
+
+//		System.out.println("컨트롤러 ->서비스로 전달된 myBoard: " + notice);
+//		//컨트롤러 ->서비스로 전달된 myBoard: MyBoardVO(bno=0, btitle=서비스 새글 입력  테스트 제목, ....)
+//		
+//		long rows = noticeMapper.insertNotice(notice) ; 
+//		System.out.println("rows: " + rows); //1
+//		
+//		System.out.println("DB 처리 후 notice: " + notice);
+//		//DB 처리 후myBoard: MyBoardVO(bno=41, btitle=서비스 새글 입력  테스트 제목, ....)
+//		
+//		return (rows == 1) ? notice.getCno() : 0;
+		
 		
 		noticeMapper.insertNotice(notice);
 		
@@ -63,16 +89,23 @@ public class NoticeServiceImpl implements NoticeService{
 	//공지사항 조회: 특정 공지사항 하나의 데이터를 가져옴
 	@Override
 	@Transactional
-	public NoticeVO getNotice(long cno, String result) {
+	public NoticeVO getNotice(Long cno, String result) {
 
 		NoticeVO notice = noticeMapper.selectNotice(cno);  
+		
+		if(result == null) {
+			noticeMapper.updateCviewCnt(cno);
+		}
+		
+		System.out.println("notice: " + notice);
+		System.out.println("조회수: " + notice.getCviewCnt());
 
 		return notice;
 	}
 
 	//특정 공지사항 수정 삭제 화면 호출
 	@Override
-	public NoticeVO getNotice2(long cno) {
+	public NoticeVO getNotice2(Long cno) {
 
 		NoticeVO notice = noticeMapper.selectNotice2(cno);
 
@@ -94,7 +127,7 @@ public class NoticeServiceImpl implements NoticeService{
 	//특정 공지사항 삭제
 	@Override
 	@Transactional
-	public boolean removeNotice(long cno) {
+	public boolean removeNotice(Long cno) {
 
 		int rows = noticeMapper.deleteNotice(cno);
 		
@@ -104,7 +137,7 @@ public class NoticeServiceImpl implements NoticeService{
 	//블라인드 처리
 	@Override
 	@Transactional
-	public boolean modifyCdelFlag(long cno) {
+	public boolean modifyCdelFlag(Long cno) {
 
 		int rows = noticeMapper.updateCdelFlag(cno);
 		

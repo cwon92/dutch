@@ -68,7 +68,7 @@
 	<select id="selectNotice" resultType="com.spring.dutch.domain.NoticeVO">
 		SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory, cdelFlag
 		FROM dutch.tbl_notice
-		WHERE cno = #{cno}
+		WHERE cno = cno
 	</select>
 
 <!-- 수정(UPDATE) -->

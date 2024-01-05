@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h3 class="page-header"
-				style="white-space: nowrap;" >Board - Detail
+				style="white-space: nowrap;" >공지사항
 				 <small>
 				 	&nbsp;&nbsp;&nbsp;<c:out value="${notice.cno}"/>번 게시물
 				 </small>
@@ -55,12 +55,12 @@
 	<sec:authentication property="principal.username" var="username"/> -->
 		<c:if test="${username eq notice.mno }">
 							<button type="button" id="btnToModify" data-oper="noticemodify"
-									class="btn btn-primary"><span>수정페이지로 이동</span></button>
+									class="btn btn-primary"><span>수정</span></button>
 		</c:if>
 <!-- </sec:authorize> -->
 									
 							<button type="button" id="btnToList" data-oper="noticelist"
-									class="btn btn-warning"><span>목록페이지로 이동</span></button>
+									class="btn btn-warning"><span>목록</span></button>
 							</div>
 						</div>
 					</div>
@@ -70,14 +70,14 @@
 
 	
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" style="white-space: nowrap;">글제목</label>
+	    <label class="col-sm-2 control-label" style="white-space: nowrap;">제목</label>
 	    <div class="col-sm-10">
 	    	<input class="form-control" name="ctitle" id="ctitle" 
 	    		   value="${notice.ctitle }" readonly="readonly">
 		</div>
 	</div>
 	<div class="form-group">
-	    <label class="col-sm-2 control-label" style="white-space: nowrap;">글내용</label>
+	    <label class="col-sm-2 control-label" style="white-space: nowrap;">내용</label>
 	    <%-- <textarea>와 </textarea>는 표시 내용과 붙어있어야 필요없는 공백이 포함되지 않음 --%>
 	    <div class="col-sm-10">
 	    	<textarea class="form-control" rows="3" name="ccontent" id="ccontent"
@@ -95,7 +95,7 @@
 	</div><%-- 여기까지 noticedetail복사 2024 01 05 --%>
 
 <%-- Modal: 게시물 수정 후, 수정 결과 표시 모달 --%>
-<div class="modal fade" id="yourModal" tabindex="-1" role="dialog" aria-labelledby="yourModalLabel" aria-hidden="true">
+<%-- <div class="modal fade" id="yourModal" tabindex="-1" role="dialog" aria-labelledby="yourModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -107,13 +107,13 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
-        </div><%-- /.modal-content --%>
-    </div><%-- /.modal-dialog --%>
-</div><%-- /.modal --%>
+        </div>/.modal-content
+    </div>/.modal-dialog
+</div>/.modal --%>
 
 <form id="frmSendValue">
 	<input type="hidden" name="pageNum" value="${noticePaging.pageNum }" >
-	<input type="hidden" name="rowAmountPerPage" value="${notice.rowAmountPerPage }" >
+	<input type="hidden" name="rowAmountPerPage" value="${noticePaging.rowAmountPerPage }" >
 	<input type="hidden" name="keyword" value="${noticePaging.keyword }" >
 </form>
                 </div><%-- /.panel-body --%>
@@ -195,5 +195,37 @@
 </form>
 
 </div><%-- /#page-wrapper --%>
+
+<%-- 상세 자바스크립트 시작 --%>
+<script>
+
+var frmSendValue = $("#frmSendValue") ;
+
+<%-- 게시물 목록 페이지 이동 --%>
+$("#btnToList").on("click", function(){
+
+	window.location.href="${contextPath}/pages/noticelist" ;
+
+/* 	frmSendValue.attr("action", "${contextPath}/pages/noticelist").attr("method", "get") ;
+	frmSendValue.submit() ; */
+});
+
+<%-- 게시물 수정-삭제 페이지 이동 --%>
+$("#btnToModify").on("click", function(){
+	<%--
+		window.location.href='${contextPath}/pages/noticemodify?cno=<c:out value="${notice.cno}"/>' ;
+	--%>
+
+		var cno = '<c:out value="${notice.cno}"/>' ;
+		
+		frmSendValue.append("<input type='hidden' name='cno' value='" + cno + "'/>") ;
+		frmSendValue.attr("action", "${contextPath}/pages/noticemodify").attr("method", "get") ;
+		frmSendValue.submit() ;
+	});
+
+
+
+</script>
+
 
 <%@include file="../pageinclude/footer.jsp" %> 

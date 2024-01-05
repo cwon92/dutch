@@ -16,19 +16,19 @@ public interface NoticeService {
 	public long registerNotice(NoticeVO notice);
 	
 	//특정 게시물 조회: 하나의 데이터를 가져옴(조회수 1 증가 고려)
-	public NoticeVO getNotice(long cno, String result);
+	public NoticeVO getNotice(Long cno, String result);
 	
 	//특정 게시물 수정 삭제 화면 도출 + 수정 후 조회 페이지 호출(조회수x)
-	public NoticeVO getNotice2(long cno);
+	public NoticeVO getNotice2(Long cno);
 	
 	//특정 게시물 수정(UPDATE)
 	public boolean modifyNotice(NoticeVO notice);
 	
 	//특정 게시물 삭제요청
-	public boolean modifyCdelFlag(long cno);
+	public boolean modifyCdelFlag(Long cno);
 	
 	//특정 게시물 삭제(DELETE)
-	public boolean removeNotice(long cno);
+	public boolean removeNotice(Long cno);
 	
 	//첨부파일 목록 조회
 }

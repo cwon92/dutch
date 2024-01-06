@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.dutch.domain.QnaReplyVO;
-import com.spring.dutch.dto.ReplyPagingCreatorDTO;
-import com.spring.dutch.dto.ReplyPagingDTO;
+import com.spring.dutch.dto.QnaReplyPagingCreatorDTO;
+import com.spring.dutch.dto.QnaReplyPagingDTO;
 import com.spring.dutch.mapper.QnaMapper;
 import com.spring.dutch.mapper.QnaReplyMapper;
 
@@ -26,23 +26,23 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 	
 	//특정 게시물에 대한 댓글 목록 조회
 	@Override
-	public ReplyPagingCreatorDTO getReplyList(ReplyPagingDTO replyPaging) {
+	public QnaReplyPagingCreatorDTO getReplyList(QnaReplyPagingDTO qnareplyPaging) {
 
-		long replyTotCnt = qnaReplyMapper.selectRowTotal(replyPaging.getQno());
+		long replyTotCnt = qnaReplyMapper.selectRowTotal(qnareplyPaging.getQno());
 		
-		int pageNum = replyPaging.getPageNum();
+		int pageNum = qnareplyPaging.getPageNum();
 		
 		if(pageNum == -10) {
-			pageNum = (int) Math.ceil((double)replyTotCnt/replyPaging.getRowAmountPerPage()) ;
-			replyPaging.setPageNum(pageNum) ;
+			pageNum = (int) Math.ceil((double)replyTotCnt/qnareplyPaging.getRowAmountPerPage()) ;
+			qnareplyPaging.setPageNum(pageNum) ;
 		}
 		
-		List<QnaReplyVO> replyList = qnaReplyMapper.selectQnaReplyList(replyPaging);
+		List<QnaReplyVO> replyList = qnaReplyMapper.selectQnaReplyList(qnareplyPaging);
 		
-		ReplyPagingCreatorDTO replyPagingCreator
-			= new ReplyPagingCreatorDTO(replyTotCnt, replyPaging, null, null);
+		QnaReplyPagingCreatorDTO qnareplyPagingCreator
+			= new QnaReplyPagingCreatorDTO(replyList, replyTotCnt, qnareplyPaging);
 		
-		return replyPagingCreator;
+		return qnareplyPagingCreator;
 	}
 
 	//특정 게시물에 대한 댓글 등록(qrcno: null)
@@ -58,8 +58,8 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 	}
 
 	//댓글에 대한 답글 등록(prcno: 부모글의 qrno값)
-	@Transactional
 	@Override
+	@Transactional
 	public Long registerReplyForReply(QnaReplyVO qnareply) {
 		qnaReplyMapper.insertQnaReplyForQna(qnareply);
 		

@@ -87,7 +87,7 @@ public class QnaController {
 	
 	//특정 게시물 수정삭제 페이지 호출
 	@GetMapping("/qnamodify")
-	@PreAuthorize("isAuthenticated() && principal.username == #mno")
+//	@PreAuthorize("isAuthenticated() && principal.username == #mno")
 	public String showQnaModify(Long qno, String mno, Model model,
 								QnaPagingDTO qnaPaging) {
 		

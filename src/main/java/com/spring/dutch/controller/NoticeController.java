@@ -69,7 +69,7 @@ public class NoticeController {
 	//@PreAuthorize("isAuthenticated()")
 	public String showNoticeRegisterPage() {
 		
-		System.out.println("등록페이지 호출");
+//		System.out.println("등록페이지 호출");
 		return "pages/noticeregister";
 	}
 	
@@ -82,25 +82,26 @@ public class NoticeController {
 		Long cno = noticeService.registerNotice(notice);
 		
 		redirectAttr.addFlashAttribute("result", cno);
-		System.out.println("result: " + redirectAttr.getFlashAttributes());
+//		System.out.println("result: " + redirectAttr.getFlashAttributes());
 		
 		return "redirect:/pages/noticelist";
 	}
 	
 	//특정 게시물 조회, 수정 후 조회
 	@GetMapping("/noticedetail")
-	public String showNoticeDetail(Long cno, Model model, String result,
-								   @ModelAttribute("noticePaging") NoticePagingDTO noticePaging) {
+	public String showNoticeDetail(Long cno, Model model,  String result,
+								   @ModelAttribute("noticePaging") 
+								   NoticePagingDTO noticePaging) {
 		
 		NoticeVO notice = null;
 		
-		System.out.println("Detail.jsp-수정삭제 후: result: " + result) ;
-		System.out.println("Detail.jsp-수정삭제 후: cno: " + cno);
+//		System.out.println("Detail.jsp-수정삭제 후: result: " + result) ;
+//		System.out.println("Detail.jsp-수정삭제 후: cno: " + cno);
 		
 		notice = noticeService.getNotice(cno, result);
 		
-		model.addAttribute(notice);
-		model.addAttribute(result);
+		model.addAttribute("notice", notice);
+		model.addAttribute("result", result);
 		
 		System.out.println("model: " + model);
 		
@@ -109,7 +110,7 @@ public class NoticeController {
 	
 	//특정 게시물 수정삭제 페이지 호출
 	@GetMapping("/noticemodify")
-	@PreAuthorize("isAuthenticated() && principal.username == #mno")
+//	@PreAuthorize("isAuthenticated() && principal.username == #mno")
 	public String showNoticeModify(Long cno, Long mno, Model model, 
 								   NoticePagingDTO noticePaging) {
 		

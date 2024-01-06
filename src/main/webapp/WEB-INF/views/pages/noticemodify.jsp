@@ -7,26 +7,11 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 
 <%@include file="../pageinclude/header.jsp" %>
+<style>
+ th {text-align: center;}
+</style>  
 
-
-
-<!-- JSP 폼 입니다 아래 공간 안에서 코딩하시면 됩니다 -->
-
-
-
-
-<h1>안녕하세요! 화이팅 합시다!</h1>
-
-
-
-
-
-
-
-
-
-
-
+<h1>Notice Modify</h1>
 
 
 <%@include file="../pageinclude/footer.jsp" %> 

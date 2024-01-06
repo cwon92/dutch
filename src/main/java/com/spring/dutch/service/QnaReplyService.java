@@ -1,13 +1,13 @@
 package com.spring.dutch.service;
 
 import com.spring.dutch.domain.QnaReplyVO;
-import com.spring.dutch.dto.ReplyPagingCreatorDTO;
-import com.spring.dutch.dto.ReplyPagingDTO;
+import com.spring.dutch.dto.QnaReplyPagingCreatorDTO;
+import com.spring.dutch.dto.QnaReplyPagingDTO;
 
 public interface QnaReplyService {
 
 	//특정 게시물에 대한 댓글 목록 조회
-	public ReplyPagingCreatorDTO getReplyList(ReplyPagingDTO replyPaging);
+	public QnaReplyPagingCreatorDTO getReplyList(QnaReplyPagingDTO qnareplyPaging);
 	
 	//특정 게시물에 대한 댓글 등록(prcno: null)
 	public Long registerReplyForQna(QnaReplyVO qnareply);

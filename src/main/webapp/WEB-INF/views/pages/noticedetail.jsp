@@ -212,16 +212,12 @@ $("#btnToList").on("click", function(){
 
 <%-- 게시물 수정-삭제 페이지 이동 --%>
 $("#btnToModify").on("click", function(){
-	<%--
-		window.location.href='${contextPath}/pages/noticemodify?cno=<c:out value="${notice.cno}"/>' ;
-	--%>
-
-		var cno = '<c:out value="${notice.cno}"/>' ;
-		
-		frmSendValue.append("<input type='hidden' name='cno' value='" + cno + "'/>") ;
-		frmSendValue.attr("action", "${contextPath}/pages/noticemodify").attr("method", "get") ;
-		frmSendValue.submit() ;
-	});
+	
+	frmSendValue.attr("action", "${contextPath}/pages/noticemodify").attr("method", "get");
+	frmSendValue.submit();
+	
+	
+});
 
 
 

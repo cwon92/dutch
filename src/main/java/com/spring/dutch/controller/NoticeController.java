@@ -98,7 +98,7 @@ public class NoticeController {
 //		System.out.println("Detail.jsp-수정삭제 후: result: " + result) ;
 //		System.out.println("Detail.jsp-수정삭제 후: cno: " + cno);
 		
-		notice = noticeService.getNotice(cno, result);
+		notice = noticeService.getNotice(cno,result);
 		
 		model.addAttribute("notice", notice);
 		model.addAttribute("result", result);

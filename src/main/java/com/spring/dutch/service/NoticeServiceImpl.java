@@ -31,23 +31,7 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 	
 	
-	
 	//공지사항 목록 조회
-//	@Override
-//	public List<NoticeVO> getNoticeList(NoticePagingDTO noticePaging) {
-//		
-//		long rowTotal = noticeMapper.selectNoticeTotal(noticePaging);
-//		
-//		List<NoticeVO> noticeList = noticeMapper.selectNoticeList(noticePaging);
-//		
-//		NoticePagingCreatorDTO pagingCreator =
-//				new NoticePagingCreatorDTO(rowTotal, noticePaging, noticeList);
-//		
-//		return noticeList;
-//		
-////		return noticeMapper.selectNoticeList();
-//	}
-		
 	@Override
 	public NoticePagingCreatorDTO getNoticeList(NoticePagingDTO noticePaging) {
 		
@@ -91,7 +75,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Transactional
 	public NoticeVO getNotice(long cno, String result) {
 
-		NoticeVO notice = noticeMapper.selectNotice(cno);  
+		NoticeVO notice = noticeMapper.selectNotice(cno);
 		
 		if(result == null) {
 			noticeMapper.updateCviewCnt(cno);

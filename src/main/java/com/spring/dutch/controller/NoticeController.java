@@ -89,7 +89,7 @@ public class NoticeController {
 	
 	//특정 게시물 조회, 수정 후 조회
 	@GetMapping("/noticedetail")
-	public String showNoticeDetail(Long cno, Model model,  String result,
+	public String showNoticeDetail(Long cno, Model model, String result,
 								   @ModelAttribute("noticePaging") 
 								   NoticePagingDTO noticePaging) {
 		
@@ -149,7 +149,7 @@ public class NoticeController {
 	//특정 게시물 삭제
 	@PostMapping("/noticeremove")
 	//@PreAuthorize("isAuthenticated() && principal.username == #notice.mno")
-	public String removeNotice(NoticeVO notice, long cno,
+	public String removeNotice(NoticeVO notice, Long cno,
 							   RedirectAttributes redirectAttr,
 							   NoticePagingDTO noticePaging) {
 		

@@ -89,7 +89,7 @@ public class NoticeServiceImpl implements NoticeService{
 	//공지사항 조회: 특정 공지사항 하나의 데이터를 가져옴
 	@Override
 	@Transactional
-	public NoticeVO getNotice(Long cno, String result) {
+	public NoticeVO getNotice(long cno, String result) {
 
 		NoticeVO notice = noticeMapper.selectNotice(cno);  
 		
@@ -105,7 +105,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	//특정 공지사항 수정 삭제 화면 호출
 	@Override
-	public NoticeVO getNotice2(Long cno) {
+	public NoticeVO getNotice2(long cno) {
 
 		NoticeVO notice = noticeMapper.selectNotice2(cno);
 
@@ -127,7 +127,7 @@ public class NoticeServiceImpl implements NoticeService{
 	//특정 공지사항 삭제
 	@Override
 	@Transactional
-	public boolean removeNotice(Long cno) {
+	public boolean removeNotice(long cno) {
 
 		int rows = noticeMapper.deleteNotice(cno);
 		
@@ -137,7 +137,7 @@ public class NoticeServiceImpl implements NoticeService{
 	//블라인드 처리
 	@Override
 	@Transactional
-	public boolean modifyCdelFlag(Long cno) {
+	public boolean modifyCdelFlag(long cno) {
 
 		int rows = noticeMapper.updateCdelFlag(cno);
 		

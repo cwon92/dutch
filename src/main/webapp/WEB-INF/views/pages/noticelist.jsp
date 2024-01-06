@@ -24,15 +24,34 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
 					<div class="row">
-						<div class="col-md-6" style="font-size:20px; height: 45px; padding-top:10px;">공지사항</div>
+						<!-- <div class="col-md-6" style="font-size:20px; height: 45px; padding-top:10px;">공지사항</div> -->
+						
+			        <div class="panel-body">
+                 		 <div class="input-group"><!-- 검색어 입력 -->
+						<input class="form-control" id="keyword" name="keyword" type="text" 
+						       placeholder="검색어를 입력하세요"
+							   value='<c:out value="${noticeCreator.noticePaging.keyword}" />' />
+						<span class="input-group-btn"><!-- 전송버튼 -->
+							<button class="btn btn-warning" type="button" id="btnSearchGo"
+									><i class="fa fa-search">검색</i>
+							</button>
 						<div class="col-md-6" style="padding-top:8px;">
 							<button type="button" id="btnToRegister" class="btn btn-primary btn-sm pull-right">새글 등록</button>
 						</div>
+						</span>
+					</div>
+<!-- 					<div class="input-group">검색 초기화 버튼
+						<button id="btnReset" class="btn btn-info" type="button">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+						</div>
+					</div> -->
+						
+
 					</div>
 				</div><%-- /.panel-heading --%>
                 
-                <div class="panel-body">
-                
+
                 
 <%-- <form class="form-inline" id="frmSendValue" name="frmSendValue" action="${contextPath }/pages/noticelist" method="get" >
 	<div class="form-group">
@@ -52,36 +71,19 @@
 			<option value="TCW" ${(noticeCreator.noticePaging.scope == "TCW" ) ? "selected" : "" }>제목+내용+작성자</option>
 		</select> 
 --%>		
-		
- 		 <div class="input-group"><!-- 검색어 입력 -->
-			<input class="form-control" id="keyword" name="keyword" type="text" 
-			       placeholder="검색어를 입력하세요"
-				   value='<c:out value="${noticeCreator.noticePaging.keyword}" />' />
-			<span class="input-group-btn"><!-- 전송버튼 -->
-				<button class="btn btn-warning" type="button" id="btnSearchGo"
-						><i class="fa fa-search"></i>
-				</button>
-			</span>
-		</div>
-		
-		<div class="input-group"><!-- 검색 초기화 버튼 -->
-			<button id="btnReset" class="btn btn-info" type="button">
-				<span class="glyphicon glyphicon-remove"></span>
-			</button>
-		</div>
-	</div>  
 	
+		<input type="hidden" id="pageNum" name="pageNum" value="${noticeCreator.noticePaging.pageNum }" >
+		<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${noticeCreator.noticePaging.rowAmountPerPage }" >
+		<input type="hidden" id="lastPageNum" name="lastPageNum" value="${noticeCreator.lastPageNum }">
 	 
-	<input type="hidden" id="pageNum" name="pageNum" value="${noticeCreator.noticePaging.pageNum }" >
-	<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${noticeCreator.noticePaging.rowAmountPerPage }" >
-	<input type="hidden" id="lastPageNum" name="lastPageNum" value="${noticeCreator.lastPageNum }">
-	 
-<!-- </form>  -->               
-<hr>  
+<!-- </form>  -->
+ 
+
 		<table class="table table-striped table-bordered table-hover" 
 		       style="width:100%;text-align: center;">
 		<thead>
 		    <tr>
+		    	<th>카테고리</th>
 		        <th>글번호</th>
 		        <th>제목</th>
 		        <th>회원번호</th>
@@ -102,7 +104,8 @@
 				</tr>
 			</c:when>
 			<c:otherwise>		
-				<tr class="moveDetail" data-bno="${notice.cno }">
+				<tr class="moveDetail" data-cno="${notice.cno }">
+				<td><c:out value="${notice.ccategory }"/></td>
 					<td><c:out value="${notice.cno }"/></td>
 					<td style="text-align: left">
 						<c:out value="${notice.ctitle }"/>

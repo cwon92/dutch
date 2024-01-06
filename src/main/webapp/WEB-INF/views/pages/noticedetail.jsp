@@ -204,17 +204,20 @@ var frmSendValue = $("#frmSendValue") ;
 <%-- 게시물 목록 페이지 이동 --%>
 $("#btnToList").on("click", function(){
 
-	window.location.href="${contextPath}/pages/noticelist" ;
+	/* window.location.href="${contextPath}/pages/noticelist" */ ;
 
-/* 	frmSendValue.attr("action", "${contextPath}/pages/noticelist").attr("method", "get") ;
-	frmSendValue.submit() ; */
+ 	frmSendValue.attr("action", "${contextPath}/pages/noticelist").attr("method", "get") ;
+	frmSendValue.submit() ; 
 });
 
 <%-- 게시물 수정-삭제 페이지 이동 --%>
 $("#btnToModify").on("click", function(){
 	
-	frmSendValue.attr("action", "${contextPath}/pages/noticemodify").attr("method", "get");
-	frmSendValue.submit();
+	var bno = '<c:out value="${notice.cno}"/>' ;
+	
+	frmSendValue.append("<input type='hidden' name='cno' value='" + cno + "'/>") ;
+	frmSendValue.attr("action", "${contextPath}/notice/noticemodify").attr("method", "get") ;
+	frmSendValue.submit() ;
 	
 	
 });

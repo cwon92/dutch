@@ -16,10 +16,10 @@ public interface QnaMapper {
 	public long selectQnaTotal(QnaPagingDTO qnaPaging);
 	
 	//특정게시물조회: 하나의 데이터만 가져옴1
-	public QnaVO selectQna(Long qno);
+	public QnaVO selectQna(long qno);
 	
 	//특정게시물조회2
-	public QnaVO selectQna2(Long qno);
+	public QnaVO selectQna2(long qno);
 	
 	//등록(CREATE)
 	public int insertQna(QnaVO qna);
@@ -31,10 +31,10 @@ public interface QnaMapper {
 	public int updateQdelFlagAdmin(Long qno);
 	
 	//삭제(DELETE)
-	public int deleteQna(Long qno);
+	public int deleteQna(long qno);
 	
 	//시그널(UPDATE)
-	public int updateQsignal(Long qno);
+	public int updateQsignal(long qno);
 	
 	//게시물의 댓글 개수 수정
 	public void updateQreplyCnt(@Param("qno") Long qno,

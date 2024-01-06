@@ -6,7 +6,7 @@
 
 <!-- 특정 게시물에 대한 댓글 목록조회 -->
 	<select id="selectQnaReplyList" resultType="com.spring.dutch.domain.QnaReplyVO"
-			parameterType="com.spring.dutch.dto.ReplyPagingDTO">
+			parameterType="com.spring.dutch.dto.QnaReplyPagingDTO">
 		<![CDATA[
 			SELECT lvl, qrno, qno, mno, qrcontent, qrdelFlag, qrregDate, qrmodDate, qrcno 
 			FROM ( SELECT /*+ INDEX(a FK_QNA_REPLY) */ ROWNUM rn, LEVEL lvl, a.*

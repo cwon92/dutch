@@ -18,16 +18,23 @@
         <div class="col-lg-12">
         
             <div class="panel panel-default">
-                <div class="panel-heading"><h4>공지사항 등록</h4></div><%-- /.panel-heading --%>
+                <div class="panel-heading"><h4></h4></div><%-- /.panel-heading --%>
                 
                 <div class="panel-body">
 
 <form role="form" action="${contextPath }/pages/noticeregister" 
       method="post" name="frmBoard" id="frmBoard">
 	<div class="form-group">
+		<label>카테고리</label>
+	<select name="noticeCategory">
+        <option value="notice">알림</option>
+        <option value="briefing">브리핑</option>
+        <option value="event">이벤트</option>
+    </select>
 	    <label>제목</label>
 	    <input class="form-control" name="ctitle" id="ctitle" placeholder="제목을 입력해주세요.">
 	</div>
+
 	<div class="form-group">
 	    <label>내용</label>
 	    <textarea class="form-control" rows="3" name="ccontent" id="ccontent"
@@ -58,20 +65,6 @@
 
 <script>
 
-<%-- 등록 --%>
-$("#btnRegister").on("click", function(){
-	
-	if(!checkBoardValues()){
-		alert("내용을 입력해 주세요.");
-		return ; 
-	}
-	
-	var frmBoard = $("#frmBoard") ;
-	
-	frmBoard.submit();
-	
-});
-
 <%-- 게시물 입력값 유무 확인 --%>
 function checkBoardValues(){
 	
@@ -86,6 +79,17 @@ function checkBoardValues(){
 		return true ;
 	}
 
+<%-- 등록 --%>
+	$("#btnRegister").on("click", function(){
+		
+		if(!checkBoardValues()){
+			alert("제목/내용을 모두 입력해야 합니다.");
+			return;
+		}
+		
+		var frmBoard = $("#frmBoard") ;
+		frmBoard.submit();
+	});
 
 </script>
 <%@include file="../pageinclude/footer.jsp" %> 

@@ -11,7 +11,7 @@ public class NoticePagingDTO {
 
 	private int pageNum; //페이징번호
 	private int rowAmountPerPage; //표시행수
-	//private String scope; //검색범위검색범위
+//	private String scope; //검색범위검색범위
 	private String keyword; //검색어
 	
 	//목록에서 표시할 행수 선택하고 페이징 번호 클릭시 전달

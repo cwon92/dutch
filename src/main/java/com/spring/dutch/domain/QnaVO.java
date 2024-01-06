@@ -16,8 +16,8 @@ import lombok.ToString;
 @AllArgsConstructor
 public class QnaVO {
 
-	private Long qno; //리스트고유번호
-	private Long mno; //회원고유번호
+	private long qno; //리스트고유번호
+	private long mno; //회원고유번호
 	private String qtitle; //제목
 	private String qcontent; //내용
 	private Date qregDate; //생성일자

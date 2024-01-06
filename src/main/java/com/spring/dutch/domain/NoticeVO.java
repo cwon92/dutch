@@ -15,8 +15,8 @@ import lombok.ToString;
 @AllArgsConstructor
 public class NoticeVO {
 
-	private Long cno; //리스트고유번호
-	private Long mno; //회원고유번호
+	private long cno; //리스트고유번호
+	private long mno; //회원고유번호
 	private String ctitle; //제목
 	private Date cregDate; //생성일
 	private int cviewCnt; //조회수

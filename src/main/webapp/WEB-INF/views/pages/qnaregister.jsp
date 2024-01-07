@@ -25,11 +25,11 @@
 					<form role="form" action="${contextPath }/pages/qnaregister" 
 					      method="post" name="frmBoard" id="frmBoard">
 						<div class="form-group">
-						    <label>제목</label>
+						    <label>문의제목</label>
 						    <input class="form-control" name="qtitle" id="qtitle" placeholder="제목을 입력해주세요.">
 						</div>
 						<div class="form-group">
-						    <label>내용</label>
+						    <label>문의내용</label>
 						    <textarea class="form-control" rows="3" name="qcontent" id="qcontent"
 						    		  placeholder="내용을 입력해주세요."></textarea>
 						</div>

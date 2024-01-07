@@ -17,18 +17,19 @@ public class NoticeServiceImpl implements NoticeService{
 	//모든 필드 초기 생성자
 	public NoticeServiceImpl(NoticeMapper noticeMapper) {
 		this.noticeMapper = noticeMapper;
+		System.out.println("NoticeServiceImpl 초기 생성자 입니다.");
 	}
 
-	//방법1:Setter 이용
-	public NoticeServiceImpl() {
-		System.out.println("NoticeServiceImpl의 기본생성자입니다.");
-	}
-	
-	@Autowired
-	public void setMyBoardMapper(NoticeMapper noticeMapper) {
-		this.noticeMapper = noticeMapper;
-		System.out.println("NoticeServiceImpl의 NoticeMapper의 Setter입니다.");	
-	}
+//	//방법1:Setter 이용
+//	public NoticeServiceImpl() {
+//		System.out.println("NoticeServiceImpl의 기본생성자입니다.");
+//	}
+//	
+//	@Autowired
+//	public void setMyBoardMapper(NoticeMapper noticeMapper) {
+//		this.noticeMapper = noticeMapper;
+//		System.out.println("NoticeServiceImpl의 NoticeMapper의 Setter입니다.");	
+//	}
 	
 	
 	//공지사항 목록 조회
@@ -50,7 +51,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	//공지사항 등록
 	@Override
-	@Transactional
+//	@Transactional
 	public long registerNotice(NoticeVO notice) {
 
 //		System.out.println("컨트롤러 ->서비스로 전달된 myBoard: " + notice);
@@ -72,22 +73,21 @@ public class NoticeServiceImpl implements NoticeService{
 
 	//공지사항 조회: 특정 공지사항 하나의 데이터를 가져옴
 	@Override
-	@Transactional
-	public NoticeVO getNotice(long cno, String result) {
+//	@Transactional
+	public NoticeVO getNotice(long cno) {
 		
-//		int rows = noticeMapper.updateCviewCnt(cno);
+		int rows = noticeMapper.updateCviewCnt(cno);
 
 		NoticeVO notice = noticeMapper.selectNotice(cno);
-		
-		if(result == null) {
-			noticeMapper.updateCviewCnt(cno);
-		}
-		
 		System.out.println("notice: " + notice);
 		System.out.println("조회수: " + notice.getCviewCnt());
-
-		return notice;
-//		return (rows == 1 ) ? notice : null ;
+		
+//		if(result == null) {
+//			noticeMapper.updateCviewCnt(cno);
+//		}
+		
+//		return notice;
+		return (rows == 1 ) ? notice : null ;
 	}
 
 	//특정 공지사항 수정 삭제 화면 호출
@@ -95,29 +95,30 @@ public class NoticeServiceImpl implements NoticeService{
 	public NoticeVO getNotice2(long cno) {
 
 		NoticeVO notice = noticeMapper.selectNotice2(cno);
+		System.out.println("notice: " + notice);
 
 		return notice;
 	}
 
 	//특정 공지사항 수정
 	@Override
-	@Transactional
+//	@Transactional
 	public boolean modifyNotice(NoticeVO notice) {
 
-		long cno = notice.getCno();
-		
-		boolean noticeModifyResult = (noticeMapper.updateNotice(notice) == 1);
-		
-		return noticeModifyResult;
-		
-//		int rows = noticeMapper.updateNotice(notice);
+//		long cno = notice.getCno();
 //		
-//		return rows == 1;
+//		boolean noticeModifyResult = (noticeMapper.updateNotice(notice) == 1);
+//		
+//		return noticeModifyResult;
+		
+		int rows = noticeMapper.updateNotice(notice);
+		
+		return rows == 1;
 	}
 
 	//특정 공지사항 삭제
 	@Override
-	@Transactional
+//	@Transactional
 	public boolean removeNotice(long cno) {
 
 		int rows = noticeMapper.deleteNotice(cno);
@@ -127,7 +128,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	//블라인드 처리
 	@Override
-	@Transactional
+//	@Transactional
 	public boolean modifyCdelFlag(long cno) {
 
 		int rows = noticeMapper.updateCdelFlag(cno);

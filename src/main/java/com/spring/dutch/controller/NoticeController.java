@@ -86,6 +86,16 @@ public class NoticeController {
 		
 		return "redirect:/pages/noticelist";
 	}
+
+//	//특정 게시물 조회
+//	@GetMapping("/noticedetail")
+//	public String showNoticeDetail(Long cno) {
+//		
+//		NoticeVO notice = noticeService.getNotice(cno);
+//		System.out.println("컨트롤러에 전달된 notice: " + notice);
+//		
+//		return "pages/noticedetail" ;
+//	}
 	
 	//특정 게시물 조회, 수정 후 조회
 	@GetMapping(value = "/noticedetail")
@@ -95,7 +105,7 @@ public class NoticeController {
 								   ) {
 		
 		NoticeVO notice = null;
-		notice = noticeService.getNotice(cno, result);
+//		notice = noticeService.getNotice(cno);
 		
 //		NoticeVO notice = noticeService.getNotice(cno, result);
 //		System.out.println("notice: " + notice);
@@ -103,12 +113,12 @@ public class NoticeController {
 //		NoticeVO notice = null;
 //		System.out.println("result: " + result);
 //		
-//		if (result == null) {//목록페이지에서 조회요청
-//			notice = noticeService.getNotice(cno) ;	
-//		
-//		} else if (result != null) {//수정 후 조회 요청
-//			notice = noticeService.getNotice2(cno) ;	
-//		}
+		if (result == null) {//목록페이지에서 조회요청
+			notice = noticeService.getNotice(cno) ;	
+		
+		} else if (result != null) {//수정 후 조회 요청
+			notice = noticeService.getNotice2(cno) ;	
+		}
 		
 //		notice = noticeService.getNotice(cno);
 		

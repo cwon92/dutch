@@ -53,10 +53,10 @@
 
 <!-- <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="username"/> -->
-		<c:if test="${username eq notice.mno }">
+		<%-- <c:if test="${username eq notice.mno }"> --%>
 							<button type="button" id="btnToModify" data-oper="noticemodify"
 									class="btn btn-primary"><span>수정</span></button>
-		</c:if>
+		<%-- </c:if> --%>
 <!-- </sec:authorize> -->
 									
 							<button type="button" id="btnToList" data-oper="noticelist"

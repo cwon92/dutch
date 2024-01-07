@@ -96,14 +96,14 @@
 <c:choose>
 <c:when test="${not empty noticeCreator.noticeList}">
 	<c:forEach var="notice" items="${noticeCreator.noticeList}">
-		<c:choose>
-			<c:when test="${notice.cdelFlag == 1 }">
+		<%-- <c:choose> --%>
+			<%-- <c:when test="${notice.cdelFlag == 1 }">
 				<tr style="background-color: Moccasin; text-align: center">
 				    <td>${notice.cno }</td>
 				    <td colspan="6"><em>작성자에 의해서 삭제된 게시글입니다.</em></td>
 				</tr>
-			</c:when>
-			<c:otherwise>		
+			</c:when> --%>
+			<%-- <c:otherwise>	 --%>	
 				<tr class="moveDetail" data-cno="${notice.cno }">
 				<td><c:out value="${notice.ccategory }"/></td>
 					<td><c:out value="${notice.cno }"/></td>
@@ -116,8 +116,8 @@
 				 	<td class="center"><c:out value="${notice.cviewCnt }"/></td>
 				 
 				 </tr>
-			</c:otherwise>
-		</c:choose>
+			<%-- </c:otherwise> --%>
+		<%-- </c:choose> --%>
 	</c:forEach>
 </c:when>
 <c:otherwise>

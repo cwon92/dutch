@@ -14,7 +14,7 @@
 	<select id="selectNoticeList" resultType="com.spring.dutch.domain.NoticeVO"
 	        parameterType="com.spring.dutch.dto.NoticePagingDTO">
 	<![CDATA[
-		SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory, cdelFlag
+		SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory
 		FROM ( SELECT /*+ INDEX_DESC (a FK_NOTICE_MNO) */ ROWNUM rn, a.* 
 		       FROM dutch.tbl_notice a
 		       WHERE ROWNUM <= (#{pageNum} * #{rowAmountPerPage})
@@ -59,14 +59,13 @@
 				#{cregDate},
 				#{cviewCnt},
 				#{ccontent},
-				#{ccategory},
-				#{cdelFlag}
+				#{ccategory}
 				)
 	</insert>
 
 <!-- 특정 게시물 조회 :글번호로 조회-->
 	<select id="selectNotice" resultType="com.spring.dutch.domain.NoticeVO">
-		SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory, cdelFlag
+		SELECT cno, mno, ctitle, cregDate, cviewCnt, ccontent, ccategory
 		FROM dutch.tbl_notice
 		WHERE cno = #{cno }
 	</select>
@@ -80,11 +79,11 @@
 	</update>
 	
 <!-- 삭제요청 -->
-	<update id="updateCdelFlag" parameterType="com.spring.dutch.domain.NoticeVO">
+	<!-- <update id="updateCdelFlag" parameterType="com.spring.dutch.domain.NoticeVO">
 		UPDATE dutch.tbl_notice
-		SET cdelFlag =1
+		SET cdelFlag = 1
 		WHERE cno = #{cno}
-	</update>
+	</update> -->
 
 <!-- 삭제(DELETE) -->
 	<delete id="deleteNotice" parameterType="com.spring.dutch.domain.NoticeVO">

@@ -103,29 +103,23 @@ public class NoticeController {
 								   @ModelAttribute("noticePaging") 
 								   NoticePagingDTO noticePaging
 								   ) {
-		
-		NoticeVO notice = null;
-//		notice = noticeService.getNotice(cno);
-		
 //		NoticeVO notice = noticeService.getNotice(cno, result);
-//		System.out.println("notice: " + notice);
-		
-//		NoticeVO notice = null;
+		NoticeVO notice = null;
 //		System.out.println("result: " + result);
 //		
-		if (result == null) {//목록페이지에서 조회요청
-			notice = noticeService.getNotice(cno) ;	
+//		if (result == null) {//목록페이지에서 조회요청
+//			notice = noticeService.getNotice(cno) ;	
+//		
+//		} else if (result != null) {//수정 후 조회 요청
+//			notice = noticeService.getNotice2(cno) ;	
+//		}
 		
-		} else if (result != null) {//수정 후 조회 요청
-			notice = noticeService.getNotice2(cno) ;	
-		}
-		
-//		notice = noticeService.getNotice(cno);
+		notice = noticeService.getNotice(cno);
 		
 		model.addAttribute("notice", notice);
 		model.addAttribute("result", result);
 		
-		System.out.println("model: " + model);
+//		System.out.println("model: " + model);
 		
 		return "/pages/noticedetail";
 	}

@@ -74,6 +74,8 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	@Transactional
 	public NoticeVO getNotice(long cno, String result) {
+		
+//		int rows = noticeMapper.updateCviewCnt(cno);
 
 		NoticeVO notice = noticeMapper.selectNotice(cno);
 		
@@ -85,6 +87,7 @@ public class NoticeServiceImpl implements NoticeService{
 		System.out.println("조회수: " + notice.getCviewCnt());
 
 		return notice;
+//		return (rows == 1 ) ? notice : null ;
 	}
 
 	//특정 공지사항 수정 삭제 화면 호출
@@ -106,6 +109,10 @@ public class NoticeServiceImpl implements NoticeService{
 		boolean noticeModifyResult = (noticeMapper.updateNotice(notice) == 1);
 		
 		return noticeModifyResult;
+		
+//		int rows = noticeMapper.updateNotice(notice);
+//		
+//		return rows == 1;
 	}
 
 	//특정 공지사항 삭제

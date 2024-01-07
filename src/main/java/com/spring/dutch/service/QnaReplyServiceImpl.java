@@ -96,7 +96,7 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 
 	//특정 게시물에 대한 모든 댓글 삭제: 삭제 행수가 반환됨
 	@Override
-	public int removeQnaReply(long qno) {
+	public int removeAllReply(long qno) {
 		
 		return qnaReplyMapper.deleteReply(qno);
 	}

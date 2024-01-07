@@ -40,12 +40,12 @@
 						</div>
 						</span>
 					</div>
-<!-- 					<div class="input-group">검색 초기화 버튼
+					<div class="input-group">
 						<button id="btnReset" class="btn btn-info" type="button">
 							<span class="glyphicon glyphicon-remove"></span>
 						</button>
 						</div>
-					</div> -->
+					</div>
 						
 
 					</div>

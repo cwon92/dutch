@@ -75,9 +75,11 @@ public class QnaController {
 	public String showQnaDetail(Long qno, Model model, String result,
 								@ModelAttribute("qnaPaging") QnaPagingDTO qnaPaging) {
 		
-		QnaVO qna = null;
+//		QnaVO qna = null;
+//		
+//		qna = qnaService.getQna(qno);
 		
-		qna = qnaService.getQna(qno);
+		QnaVO qna = qnaService.getQna(qno);
 		
 		model.addAttribute("qno", qno);
 		model.addAttribute("result", result);

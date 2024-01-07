@@ -67,7 +67,7 @@
 					<td><c:out value="${qna.qno }"/></td>
 					<td style="text-align: left">
 						<c:out value="${qna.qtitle }"/>
-						<%-- <small>[댓글수: <strong><c:out value="${myboard.breplyCnt}"/></strong>]</small> --%>
+						<small>[답변유무: <strong><c:out value="${qna.qsignal}"/></strong>]</small>
 					</td>
 					<td>${qna.mno }</td>
 					<td class="center"><fmt:formatDate value="${qna.qregDate }" pattern="yyyy/MM/dd HH:mm:ss"/></td>

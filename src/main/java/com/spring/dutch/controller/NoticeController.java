@@ -88,28 +88,40 @@ public class NoticeController {
 	}
 	
 	//특정 게시물 조회, 수정 후 조회
-	@GetMapping("/noticedetail")
+	@GetMapping(value = "/noticedetail")
 	public String showNoticeDetail(Long cno, Model model, String result,
 								   @ModelAttribute("noticePaging") 
-								   NoticePagingDTO noticePaging) {
+								   NoticePagingDTO noticePaging
+								   ) {
 		
 		NoticeVO notice = null;
+		notice = noticeService.getNotice(cno, result);
 		
-//		System.out.println("Detail.jsp-수정삭제 후: result: " + result) ;
-//		System.out.println("Detail.jsp-수정삭제 후: cno: " + cno);
+//		NoticeVO notice = noticeService.getNotice(cno, result);
+//		System.out.println("notice: " + notice);
 		
-		notice = noticeService.getNotice(cno,result);
+//		NoticeVO notice = null;
+//		System.out.println("result: " + result);
+//		
+//		if (result == null) {//목록페이지에서 조회요청
+//			notice = noticeService.getNotice(cno) ;	
+//		
+//		} else if (result != null) {//수정 후 조회 요청
+//			notice = noticeService.getNotice2(cno) ;	
+//		}
+		
+//		notice = noticeService.getNotice(cno);
 		
 		model.addAttribute("notice", notice);
 		model.addAttribute("result", result);
 		
 		System.out.println("model: " + model);
 		
-		return "pages/noticedetail";
+		return "/pages/noticedetail";
 	}
 	
 	//특정 게시물 수정삭제 페이지 호출
-	@GetMapping("/noticemodify")
+	@GetMapping(value ="/noticemodify")
 //	@PreAuthorize("isAuthenticated() && principal.username == #mno")
 	public String showNoticeModify(Long cno, Long mno, Model model, 
 								   NoticePagingDTO noticePaging) {
@@ -118,7 +130,7 @@ public class NoticeController {
 		
 		model.addAttribute("notice", notice);
 		
-		return "pages/noticemodify";
+		return "/pages/noticemodify";
 	}
 	
 	//특정 게시물 수정

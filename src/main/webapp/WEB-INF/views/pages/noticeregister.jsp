@@ -29,8 +29,11 @@
 	<select name="noticeCategory">
         <option value="notice">알림</option>
         <option value="briefing">브리핑</option>
-        <option value="event">이벤트</option>
-    </select>
+    </select><%-- 
+    <select class="form-control" id="selectScope" name="scope">
+			<option value="N" ${(noticeCreator.noticePaging.scope == "N" ) ? "selected" : "" }>알림</option>
+			<option value="B" ${(noticeCreator.noticePaging.scope == "T" ) ? "selected" : "" }>브리핑</option>
+	</select> --%>
 	    <label>제목</label>
 	    <input class="form-control" name="ctitle" id="ctitle" placeholder="제목을 입력해주세요.">
 	</div>

@@ -125,11 +125,45 @@
 </div>
 
 <form id="frmSendValue">
-
-
-
+<%-- 	<input type="hidden" name="pageNum" value="${dutchPaging.pageNum }" >
+	<input type="hidden" name="rowAmountPerPage" value="${dutchPaging.rowAmountPerPage }" > --%>
+	
 </form>
 
+
+
+<%-- 댓글 요소 시작 --%>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default" >
+			<div class="panel-heading">
+				<div style="margin-bottom: 0px; font-size: 16px;">
+					<strong style="padding-top: 2px;">
+						<span>댓글&nbsp;<%-- <c:out value="${myboard.breplyCnt}"/> --%>개</span>
+						<span id="replyTotal"></span>
+						<span>&nbsp;</span>
+						<button type="button" id="btnChgCmtReg" class="btn btn-info btn-sm">댓글 작성</button>
+												
+						<button type="button" id="btnRegCmt" class="btn btn-warning btn-sm"
+								style="display:none">댓글 등록</button>
+						<button type="button" id="btnCancelRegCmt" class="btn btn-warning btn-sm"
+								style="display:none">취소</button>&nbsp;&nbsp;&nbsp;
+						<span id="spanLoginUser" style="display:none">
+
+						</span>	
+					</strong>
+				</div>
+			</div> <%-- /.panel-heading --%>
+			
+<%--답글 표시 영역 --%>
+<ul class="chat" id="chat">			
+			
+</ul><%-- /.chat --%>	
+
+					
+		</div><%-- /.panel --%>
+	</div><%-- .col-lg-12 --%>
+</div><%-- .row : 댓글 화면 표시 끝 --%>			
 <script>
 
 var frmSendValue = $("#frmSendValue") ;
@@ -145,6 +179,9 @@ $("#btnToList").on("click", function(){
 <%-- 게시물 수정-삭제 페이지로 이동 --%>
 $("#btnToModify").on("click", function(){
 	
+	var pno = '<c:out value="${dutchboard.pno}"/>' ;
+	
+	frmSendValue.append("<input type='hidden' name='pno' value='" + pno + "'/>") ;
 	frmSendValue.attr("action", "${contextPath}/pages/dutchmodify").attr("method", "get");
 	frmSendValue.submit();
 	

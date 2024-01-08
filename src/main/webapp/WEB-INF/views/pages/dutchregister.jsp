@@ -25,9 +25,22 @@
                 <!-- /.panel-heading -->
                              
                 <div class="panel-body">
+                
+<form class="form-inline" id="frmSendValue" action="${contextPath }/pages/dutchregister" method="get" name="frmSendValue">
+		
+	<input type="hidden" id="pageNum" name="pageNum" value="${pagingCreator.dutchRegisterPaging.pageNum }" >
+	<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${pagingCreator.dutchRegisterPaging.rowAmountPerPage }" >
+	<input type="hidden" id="lastPageNum" name="lastPageNum" value="${pagingCreator.lastPageNum }" >
+	
+</form>                 
 
 <form role="form" action="${contextPath }/pages/dutchregister" 
       method="post" name="frmBoard" id="frmBoard">
+    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+	<div class="form-group">
+	    <label>방만든사람: </label>
+	    <strong>아직안함<%-- <c:out value="${member.nickname }" /> --%></strong>
+	</div>
 	<div class="form-group">
 	    <label>방제목</label>
 	    <input class="form-control" name="ptitle" id="ptitle" placeholder="제목을 입력하세요.">
@@ -39,21 +52,81 @@
 	<div class="form-group">
 		<label>회원고유번호</label>
 	    <input class="form-control" name="mno" id="mno" placeholder="회원고유번호를 검색하세요.">
-	</div>
+	</div>	
 	
-<!-- 	<div class="form-group">
+	<div class="form-group">
 		<label>방내용</label>
-	    <input class="form-control" name="pcontent" id="pcontent" placeholder="회원고유번호를 검색하세요.">
-		</div> -->
+	    <input class="form-control" name="pcontent" id="pcontent">
+		</div>
 	
 	<button type="button" class="btn btn-primary" id="btnUserAdd">참여자 추가 버튼</button>
-
+	
+	<%-- <small>[방작성자: <strong><c:out value="${member.nickname}"/></strong>]</small> --%>
 	<div class="btnAdd">
-	<label>회원 닉네임</label>
-	<input name="nickname" id="nickname"/> <%-- value="${member.nickname }" --%>
-	    		   <button type="button" class="btn btn-primary btnUserConfirmed">등록</button>
-	    		   <button type="button" class="btn btn-warning btnUserDelete">삭제</button>
+<%-- 	<label>회원 닉네임</label>
+	<input name="nickname" id="nickname" value="${member.nickname}"> 
+	    		   <button type="button" class="btn btn-warning btnUserDelete">삭제</button>    --%>
+	    		   
+	</div>    
+	
+	<div>
+		<table class="table table-striped table-boardered table-hover" style="width:30%; text-align:left;">
+			<thead>
+				<tr>
+					<th>닉네임 목록</th>
+				</tr>
+			</thead>
+				<c:forEach var="memberList" items="${pagingCreator.memberList}">
+					<tr>
+		          		<td><c:out value="${memberList.nickname}"/></td>   		
+		        	</tr>	
+				</c:forEach>
+		</table>
 	</div>
+	
+<%--member 페이징 --%>
+<div style="text-align: left;">
+	<ul class="pagination pagination-sm" >
+		<c:if test="${pagingCreator.prev }">
+			<li class="pagination-button">
+				<a href="1" aria-label="Previous">
+					<span aria-hidden="true">&laquo</span>
+				</a>
+			</li>
+		</c:if>
+		<c:if test="${pagingCreator.prev }">
+			<li class="pagination-button">
+				<a href="${pagingCreator.startPagingNum - 1 }" aria-label="Previous">
+					<span aria-hidden="true">이전</span>
+				</a>
+			</li>
+		</c:if>
+		<c:forEach begin="${pagingCreator.startPagingNum }" 
+		           end="${pagingCreator.endPagingNum }" 
+		           var="pagingNum">
+			
+			<li class='pagination-button ${(pagingNum == pagingCreator.dutchRegisterPaging.pageNum) ? "active" : ""}'>
+				<a href="${pagingNum }">${pagingNum }</a>
+			</li>     
+		</c:forEach>
+		<c:if test="${pagingCreator.next }">
+			<li class="pagination-button">
+				<a href="${pagingCreator.endPagingNum + 1 }" aria-label="Next">
+					<span aria-hidden="true">다음</span>
+				</a>
+			</li>
+		</c:if>
+		<c:if test="${pagingCreator.next }">
+			<li class="pagination-button">
+				<a href="${pagingCreator.lastPageNum }" aria-label="Next">
+					<span aria-hidden="true">&raquo</span>
+				</a>
+			</li>
+		</c:if>
+		
+	  
+	</ul>
+</div>
 	
     <div class="form-group">
  		<label>전체금액</label>
@@ -69,7 +142,7 @@
 	           <%-- value='<sec:authentication property="principal.username"/>' />--%>
 	
 
-	<button type="button" class="btn btn-primary" id="btnUserConfirmed">확정</button>
+	<button type="button" class="btn btn-primary" id="btnUserConfirmed">회원확정</button>
 	<button type="button" class="btn btn-primary" id="btnRegister">게시물 등록</button>
 	<button type="button" class="btn btn-warning"
 			onclick="location.href='${contextPath}/pages/dutchlist';">취소</button>
@@ -86,24 +159,23 @@
 </div>
         <!-- /#page-wrapper -->
 
-<form id="frmSendValue">
-
-</form>
-
-        
+   
 <script>
+
+var frmSendValue = $("#frmSendValue");
+var frmBoard = $("#frmBoard");
 
 <%-- 더치페이 게시물에 입력값 유무 확인 함수 --%>
 function checkBoardValues(){
 	
 	var ptitle = document.getElementById("ptitle").value ;
 	var category = document.getElementById("category").value ;
-	var mno = document.getElementById("mno").value ;
+//	var mno = document.getElementById("mno").value ;
 //	var pcontent = document.getElementById("pcontent").value ;
 	var ptotalPayment = document.getElementById("ptotalPayment").value ;
 	var ppersonal = document.getElementById("ppersonal").value ;
 	
-	if (ptitle.length == 0 || category.length == 0 || mno.length == 0 || ptotalPayment.length == 0 || ppersonal.length == 0) {
+	if (ptitle.length == 0 || category.length == 0 || ptotalPayment.length == 0 || ppersonal.length == 0) {
 		
 		return false;
 	} else {
@@ -125,30 +197,56 @@ function checkBoardValues(){
     }); // end click                                            
 }); // end ready  */
 
-<%-- User input 여러개 등록--%>
+<%-- User input 여러개 등록 처리 --%>
 $("#btnUserAdd").on("click", function(){
 	
-	$(".btnAdd").append("<br><label>회원 닉네임</label><input name='nickname'/> <button type='button' class='btn btn-primary btnUserConfirmed'>등록</button> <button type='button' class='btn btn-warning btnUserDelete'>삭제</button> <br>");
+//	var nicknameCount = 1;
+	
+	$(".btnAdd").append('<br><label>회원 닉네임</label><input name="nicknames" value=""/><button type="button" class="btn btn-warning btnUserDelete">삭제</button> <br>');
+	$(".btnAdd").append('<br><label>회원 닉네임</label><input name="nicknames2" value=""/><button type="button" class="btn btn-warning btnUserDelete">삭제</button> <br>');
+	$(".btnAdd").append('<br><label>회원 닉네임</label><input name="nicknames3" value=""/><button type="button" class="btn btn-warning btnUserDelete">삭제</button> <br>');
+	$(".btnAdd").append('<br><label>회원 닉네임</label><input name="nicknames4" value=""/><button type="button" class="btn btn-warning btnUserDelete">삭제</button> <br>');
+	
+//	const newInput = $('<br><label>회원 닉네임</label><input name="nicknames' + nicknameCount + '" value=""/><button type="button" class="btn btn-warning btnUserDelete">삭제</button> <br>');
 
+//	$(".btnAdd").append(newInput);
+	
+//	nicknameCount++;
+//	console.log(nicknameCount);
+	
 	$(".btnUserDelete").on("click", function(){
-//		$(this).siblings().remove();
- 		$(this).prev().prev().prev().prev().remove();
+		$(this).prev().prev().prev().prev().remove();
 		$(this).prev().prev().prev().remove();
 		$(this).prev().prev().remove();
-		$(this).prev().remove(); 
 		$(this).next().remove();
+		$(this).prev().remove(); 
 		$(this).remove();
-		
+//		$(this).next().remove();
+//		$(this).siblings().remove();
+
 	});
 	
 });
 
+//#frmBoard > div.btnAdd > input:nth-child(8)
 
-<%-- User input 삭제 --%>
-$(".btnUserDelete").on("click", function(){
-	alert("삭제되었습니다.");
+<%-- 확정버튼 클릭시 readonly 처리 --%>
+$("#btnUserConfirmed").on("click", function(){
+	
+	
+	console.log(frmBoard.find("input[name='nicknames']").val());
+	console.log(frmBoard.find("input[name='nicknames2']").val());
+	console.log(frmBoard.find("input[name='nicknames3']").val());
+	console.log(frmBoard.find("input[name='nicknames4']").val());
+	frmBoard.find("input[name='nickname']").attr("readonly", true);
+//	$(".nickname").attr("readonly", true);
+	
+	$("#btnUserConfirmed").attr("readonly", true);
+	
+	alert("확정되었습니다.");
 	
 });
+
 
 <%-- 더치페이 게시글 내용 등록버튼 값 --%>
 $("#btnRegister").on("click", function(){
@@ -163,6 +261,21 @@ $("#btnRegister").on("click", function(){
 	frmBoard.submit();
 	
 });
+
+
+<%-- 페이징 처리: 회원정보 목록 페이징 이동 --%>
+$("li.pagination-button a").on("click", function(e){
+	e.preventDefault();
+	
+	frmSendValue.find("input[name='pageNum']").val($(this).attr("href"));
+	console.log(frmSendValue.find("input[name='pageNum']").val());
+	frmSendValue.attr("action", "${contextPath}/pages/dutchregister")
+	frmSendValue.attr("method", "get");
+	
+	frmSendValue.submit();
+	
+});
+
 
 
 

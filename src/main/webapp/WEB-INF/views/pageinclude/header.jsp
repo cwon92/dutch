@@ -17,13 +17,13 @@
     <!-- Bootstrap -->
     <link href="${contextPath}/resources/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap navbar css -->
-	<link href="${contextPath}/reources/docs/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet">
+<%-- 	<link href="${contextPath}/reources/docs/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet"> --%>
 	<!-- Bootstrap signin css -->
-	<link href="${contextPath}/reources/docs/examples/signin/signin.css" rel="stylesheet">
+<%-- 	<link href="${contextPath}/reources/docs/examples/signin/signin.css" rel="stylesheet"> --%>
 	<!-- Bootstrap navbar-static-top css -->
-	<link href="${contextPath}/reources/docs/examples/navbar-static-top/navbar-static-top.css" rel="stylesheet">
+<%-- 	<link href="${contextPath}/reources/docs/examples/navbar-static-top/navbar-static-top.css" rel="stylesheet"> --%>
 	<!-- Bootstrap offcanvas css -->
-	<link href="${contextPath}/reources/docs/examples/offcanvas/offcanvas.css" rel="stylesheet">
+<%-- 	<link href="${contextPath}/reources/docs/examples/offcanvas/offcanvas.css" rel="stylesheet"> --%>
 	<!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Bootstrap JS -->

@@ -6,7 +6,7 @@
 
 <mapper namespace="com.spring.dutch.mapper.DutchBoardMapper">
 
-<!-- 더치페이 목록조회(READ) -->
+<!-- 더치페이 목록조회1(READ) -->
 <!-- 	<select id="selectDutchBoardList" resultType="com.spring.dutch.domain.DutchVO">
 		SELECT pno, category, mno, ptitle, pcontent, pregDate, 
 		pmodDate, pdelFlag, pdelFlagAdmin, ppersonal, ptotalPayment, pcalculated
@@ -15,8 +15,8 @@
 	</select> -->
 
 
-<!-- 더치페이 목록조회(READ) -->
-	<select id="selectDutchBoardList" resultType="com.spring.dutch.domain.DutchBoardVO"
+<!-- 더치페이 목록조회2(READ) -->
+<!-- 	<select id="selectDutchBoardList" resultType="com.spring.dutch.domain.DutchBoardVO"
 	        parameterType="com.spring.dutch.dto.DutchBoardPagingDTO">
 	<![CDATA[
 		SELECT pno, category, mno, ptitle, pcontent, pregDate, 
@@ -32,7 +32,27 @@
 			WHERE rn > = ((#{pageNum} * #{rowAmountPerPage}) - (#{rowAmountPerPage} - 1 ))
 	]]>
 
-	</select>
+	</select> -->
+	
+<!-- 더치페이 목록조회3(READ) -->
+	<select id="selectDutchBoardList" resultType="com.spring.dutch.domain.DutchBoardVO"
+	        parameterType="com.spring.dutch.dto.DutchBoardPagingDTO">
+	<![CDATA[
+		SELECT pno, category, mno, ptitle, pcontent, pregDate, 
+			   pmodDate, pdelFlag, pdelFlagAdmin, ppersonal, ptotalPayment, pcalculated
+		FROM ( SELECT /*+ INDEX_DESC (a pk_pno_dutch) */ ROWNUM rn, a.* 
+               FROM dutch.tbl_dutch a
+               WHERE
+	]]>
+
+	<![CDATA[      			       
+			       ROWNUM <= (#{pageNum} * #{rowAmountPerPage})
+			  )
+			WHERE rn > = ((#{pageNum} * #{rowAmountPerPage}) - (#{rowAmountPerPage} - 1 ))
+	]]>
+
+	</select>	
+	
 
 <!-- 더치페이 게시물 총 개수 조회(페이징): 삭제 요청된 행 포함 --> 	
 	<select id="selectDutchRowTotal" resultType="long"
@@ -47,7 +67,6 @@
 	<selectKey order="BEFORE" keyProperty="pno" resultType="long">
 		SELECT dutch.seq_dutch.nextval from dual
 	</selectKey>
-
 			INSERT INTO dutch.tbl_dutch
 			VALUES (#{pno},
 			        #{category},
@@ -69,9 +88,88 @@
 
 	SELECT pno, category, mno, ptitle, pcontent, pregDate, 
 		   pmodDate, pdelFlag, pdelFlagAdmin, ppersonal, ptotalPayment, pcalculated
-	FROM dutch.tbl_dutch WHERE pno = #{pno}
+	FROM dutch.tbl_dutch 
+	WHERE pno = #{pno}
 
 </select>	
+
+<select id="selectDutchBoard2" resultType="com.spring.dutch.domain.DutchBoardVO">
+
+	SELECT pno, category, mno, ptitle, pcontent, pregDate, 
+		   pmodDate, pdelFlag, pdelFlagAdmin, ppersonal, ptotalPayment, pcalculated
+	FROM dutch.tbl_dutch 
+	WHERE pno = #{pno}
+
+</select>
+
+<!-- member에서 nickname 가져오기 -->
+<select id="selectDutchNickname" resultType="com.spring.dutch.domain.MemberVO" parameterType="com.spring.dutch.domain.DutchBoardVO">
+	 SELECT nickname FROM dutch.tbl_member WHERE mno = #{mno}
+</select>
+
+
+<!-- 모든 회원 정보 조회 -->
+<select id="getAllMembers" resultType="com.spring.dutch.domain.MemberVO"
+        parameterType="com.spring.dutch.dto.DutchRegisterPagingDTO">
+		<![CDATA[
+		SELECT  mno, nickname, bank, bank_account, username, email,
+		       password, hp, cellphone, reg_date, mod_date, del_flag, login_type, 
+		       gender, age, enabled
+		FROM   (SELECT /*+ INDEX_DESC (a pk_mno) */ ROWNUM rn, a.* 
+		       FROM dutch.tbl_member a
+               WHERE
+		]]>
+		
+		
+		<![CDATA[      			       
+			          ROWNUM <= (#{pageNum} * #{rowAmountPerPage})
+			    )
+			   WHERE rn > = ((#{pageNum} * #{rowAmountPerPage}) - (#{rowAmountPerPage} - 1 ))
+		]]>
+		
+		
+</select>
+
+<!-- 회원정보 목록 총 개수 조회(페이징): 삭제 요청된 행 포함 --> 	
+	<select id="selectMemberRowTotal" resultType="long"
+			parameterType="com.spring.dutch.dto.DutchRegisterPagingDTO">
+		SELECT count(*) rowtotal FROM dutch.tbl_member
+
+	</select>
+
+
+<!-- 게시물 수정 -->
+	<update id="updateMyBoard" parameterType="com.spring.dutch.domain.DutchBoardVO">
+		UPDATE dutch.tbl_dutch
+		    set ptitle = #{ptitle},
+		        category = #{category} ,
+		        pcontent = #{pcontent},
+		        pmodDate = #{pmodDate},
+		        ppersonal = #{ppersonal},
+		        ptotalPayment = {ptotalPayment}
+		where pno = #{pno}
+	</update>
+
+
+<!-- 게시물 삭제(Delete) -->
+	<delete id="deleteMyBoard" parameterType="long">
+		delete from dutch.tbl_dutch
+		where pno = #{pno}
+	</delete>
+
+<!-- 게시물 삭제요청(pdelFlagAdmin를 1로 업데이트) -->
+	<update id="updatepdelFlagAdmin" parameterType="long">
+		update dutch.tbl_dutch
+	    	set pdelFlagAdmin = #{pdelFlagAdmin}
+		where pno = #{pno}
+
+	</update>
+
+
+
+
+
+
 
 
 

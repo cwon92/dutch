@@ -2,7 +2,9 @@ package com.spring.dutch.domain;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class DutchBoardVO {
 
@@ -27,4 +30,12 @@ public class DutchBoardVO {
 	private int ptotalPayment ;    //전체금액
 	private int pcalculated ;      //방정산완료
 
+	private List<MemberVO> member;
+	
+//	private String nicknames ;
+//	private String nicknames2 ;
+//	private String nicknames3 ;
+//	private String nicknames4 ;
+	
+	
 }

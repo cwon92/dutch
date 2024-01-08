@@ -3,16 +3,24 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 
 <mapper namespace="com.spring.dutch.mapper.DutchBoardMapper">
 
 <!-- 더치페이 목록조회1(READ) -->
+=======
+  
+<mapper namespace="com.spring.dutch.mapper.DutchBoardMapper">
+
+<!-- 더치페이 목록조회(READ) -->
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 <!-- 	<select id="selectDutchBoardList" resultType="com.spring.dutch.domain.DutchVO">
 		SELECT pno, category, mno, ptitle, pcontent, pregDate, 
 		pmodDate, pdelFlag, pdelFlagAdmin, ppersonal, ptotalPayment, pcalculated
 		FROM dutch.tbl_dutch
 		ORDER BY pno DESC
 	</select> -->
+<<<<<<< HEAD
 
 
 <!-- 더치페이 목록조회2(READ) -->
@@ -35,6 +43,11 @@
 	</select> -->
 	
 <!-- 더치페이 목록조회3(READ) -->
+=======
+	
+	
+<!-- 더치페이 목록조회(READ) -->
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 	<select id="selectDutchBoardList" resultType="com.spring.dutch.domain.DutchBoardVO"
 	        parameterType="com.spring.dutch.dto.DutchBoardPagingDTO">
 	<![CDATA[
@@ -44,6 +57,7 @@
                FROM dutch.tbl_dutch a
                WHERE
 	]]>
+<<<<<<< HEAD
 
 	<![CDATA[      			       
 			       ROWNUM <= (#{pageNum} * #{rowAmountPerPage})
@@ -54,25 +68,50 @@
 	</select>	
 	
 
+=======
+	
+	<![CDATA[      			       
+			       ROWNUM <= (#{pageNum} * #{rowAmountPerPage})
+			      )
+			WHERE rn > = ((#{pageNum} * #{rowAmountPerPage}) - (#{rowAmountPerPage} - 1 ))
+	]]>
+
+	</select>
+	
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 <!-- 더치페이 게시물 총 개수 조회(페이징): 삭제 요청된 행 포함 --> 	
 	<select id="selectDutchRowTotal" resultType="long"
 			parameterType="com.spring.dutch.dto.DutchBoardPagingDTO">
 		SELECT count(*) rowtotal FROM dutch.tbl_dutch
+<<<<<<< HEAD
 
 	</select>
 
+=======
+	
+	</select>
+	
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 <!-- 게시물 등록(CREATE) -->
 
 <insert id="insertDutchBoard" parameterType="com.spring.dutch.domain.DutchBoardVO">
 	<selectKey order="BEFORE" keyProperty="pno" resultType="long">
 		SELECT dutch.seq_dutch.nextval from dual
 	</selectKey>
+<<<<<<< HEAD
+=======
+	
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 			INSERT INTO dutch.tbl_dutch
 			VALUES (#{pno},
 			        #{category},
 			        #{mno},
 			        #{ptitle},
+<<<<<<< HEAD
 			        #{pcontent},
+=======
+			        NULL,
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 			        DEFAULT,
 			        DEFAULT,
 			        DEFAULT,
@@ -88,6 +127,7 @@
 
 	SELECT pno, category, mno, ptitle, pcontent, pregDate, 
 		   pmodDate, pdelFlag, pdelFlagAdmin, ppersonal, ptotalPayment, pcalculated
+<<<<<<< HEAD
 	FROM dutch.tbl_dutch 
 	WHERE pno = #{pno}
 
@@ -175,4 +215,18 @@
 
 
 
+=======
+	FROM dutch.tbl_dutch WHERE pno = #{pno}
+	
+</select>	
+
+
+<!-- member에서 nickname 가져오기 -->
+<select id="selectDutchNickname" resultType="com.spring.dutch.domain.MemberVO">
+	 select mno from dutch.tbl_member where nickname = #{nickname};
+</select>
+	
+	
+	
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 </mapper>

@@ -10,6 +10,7 @@
 <%@include file="../pageinclude/header.jsp" %>
 
 <style>
+<<<<<<< HEAD
 /*  th {text-align: center;}
  p {white-space:pre-wrap;} */
 </style>  
@@ -113,6 +114,14 @@
 	      		   value='<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${dutchboard.pmodDate }"/>' readonly="readonly">
 		</div>
 	</div>
+=======
+ th {text-align: center;}
+ p {white-space:pre-wrap;}
+</style>  
+
+
+<h3>여기는 modify입니다.</h3>
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
     
     
     
@@ -122,6 +131,7 @@
 
     
 </div><%-- /#page-wrapper --%>
+<<<<<<< HEAD
 </div>  
 
 
@@ -129,6 +139,9 @@
     
     
    
+=======
+</div>
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 
 <form id="frmSendValue">
 

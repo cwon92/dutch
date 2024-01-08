@@ -17,6 +17,7 @@
     <!-- Bootstrap -->
     <link href="${contextPath}/resources/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap navbar css -->
+<<<<<<< HEAD
 <%-- 	<link href="${contextPath}/reources/docs/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet"> --%>
 	<!-- Bootstrap signin css -->
 <%-- 	<link href="${contextPath}/reources/docs/examples/signin/signin.css" rel="stylesheet"> --%>
@@ -24,6 +25,9 @@
 <%-- 	<link href="${contextPath}/reources/docs/examples/navbar-static-top/navbar-static-top.css" rel="stylesheet"> --%>
 	<!-- Bootstrap offcanvas css -->
 <%-- 	<link href="${contextPath}/reources/docs/examples/offcanvas/offcanvas.css" rel="stylesheet"> --%>
+=======
+	<%-- <link href="${contextPath}/reources/docs/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet"> --%>
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 	<!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Bootstrap JS -->
@@ -42,6 +46,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+<<<<<<< HEAD
           <a class="navbar-brand homeBtn">Dutch_Pay</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -49,6 +54,16 @@
             <li class="active homeBtn"><a href="${contextPath }/">홈</a></li>
             <li><a href="${contextPath }/mypage">마이페이지</a></li>
             <li><a href="${contextPath }/pages/dutchlist">더치페이 게시판</a></li>
+=======
+          <a class="navbar-brand" href="${contextPath }">Dutch_Pay</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="${contextPath }">홈</a></li>
+            <%-- <li><a href="${contextPath }/myboard/list">더치페이</a></li> --%>
+            <li><a href="${contextPath }/pages/dutchlist">더치페이</a></li>
+            <li><a href="#">마이페이지</a></li>
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
             <li><a href="#">커뮤니티</a></li>
             <li id="moveCard"><a href="#">추천카드</a></li>
             <li class="dropdown">

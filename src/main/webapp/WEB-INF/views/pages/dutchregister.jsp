@@ -25,6 +25,7 @@
                 <!-- /.panel-heading -->
                              
                 <div class="panel-body">
+<<<<<<< HEAD
                 
 <form class="form-inline" id="frmSendValue" action="${contextPath }/pages/dutchregister" method="get" name="frmSendValue">
 		
@@ -41,6 +42,11 @@
 	    <label>방만든사람: </label>
 	    <strong>아직안함<%-- <c:out value="${member.nickname }" /> --%></strong>
 	</div>
+=======
+
+<form role="form" action="${contextPath }/pages/dutchregister" 
+      method="post" name="frmBoard" id="frmBoard">
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 	<div class="form-group">
 	    <label>방제목</label>
 	    <input class="form-control" name="ptitle" id="ptitle" placeholder="제목을 입력하세요.">
@@ -52,6 +58,7 @@
 	<div class="form-group">
 		<label>회원고유번호</label>
 	    <input class="form-control" name="mno" id="mno" placeholder="회원고유번호를 검색하세요.">
+<<<<<<< HEAD
 	</div>	
 	
 	<div class="form-group">
@@ -127,6 +134,23 @@
 	  
 	</ul>
 </div>
+=======
+	</div>
+	
+<!-- 	<div class="form-group">
+		<label>방내용</label>
+	    <input class="form-control" name="pcontent" id="pcontent" placeholder="회원고유번호를 검색하세요.">
+		</div> -->
+	
+	<button type="button" class="btn btn-primary" id="btnUserAdd">참여자 추가 버튼</button>
+
+	<div class="btnAdd">
+	<label>회원 닉네임</label>
+	<input name="nickname" id="nickname"/> <%-- value="${member.nickname }" --%>
+	    		   <button type="button" class="btn btn-primary btnUserConfirmed">등록</button>
+	    		   <button type="button" class="btn btn-warning btnUserDelete">삭제</button>
+	</div>
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 	
     <div class="form-group">
  		<label>전체금액</label>
@@ -142,7 +166,11 @@
 	           <%-- value='<sec:authentication property="principal.username"/>' />--%>
 	
 
+<<<<<<< HEAD
 	<button type="button" class="btn btn-primary" id="btnUserConfirmed">회원확정</button>
+=======
+	<button type="button" class="btn btn-primary" id="btnUserConfirmed">확정</button>
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 	<button type="button" class="btn btn-primary" id="btnRegister">게시물 등록</button>
 	<button type="button" class="btn btn-warning"
 			onclick="location.href='${contextPath}/pages/dutchlist';">취소</button>
@@ -159,23 +187,40 @@
 </div>
         <!-- /#page-wrapper -->
 
+<<<<<<< HEAD
    
 <script>
 
 var frmSendValue = $("#frmSendValue");
 var frmBoard = $("#frmBoard");
+=======
+<form id="frmSendValue">
+
+</form>
+
+        
+<script>
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 
 <%-- 더치페이 게시물에 입력값 유무 확인 함수 --%>
 function checkBoardValues(){
 	
 	var ptitle = document.getElementById("ptitle").value ;
 	var category = document.getElementById("category").value ;
+<<<<<<< HEAD
 //	var mno = document.getElementById("mno").value ;
+=======
+	var mno = document.getElementById("mno").value ;
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 //	var pcontent = document.getElementById("pcontent").value ;
 	var ptotalPayment = document.getElementById("ptotalPayment").value ;
 	var ppersonal = document.getElementById("ppersonal").value ;
 	
+<<<<<<< HEAD
 	if (ptitle.length == 0 || category.length == 0 || ptotalPayment.length == 0 || ppersonal.length == 0) {
+=======
+	if (ptitle.length == 0 || category.length == 0 || mno.length == 0 || ptotalPayment.length == 0 || ppersonal.length == 0) {
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 		
 		return false;
 	} else {
@@ -197,6 +242,7 @@ function checkBoardValues(){
     }); // end click                                            
 }); // end ready  */
 
+<<<<<<< HEAD
 <%-- User input 여러개 등록 처리 --%>
 $("#btnUserAdd").on("click", function(){
 	
@@ -224,10 +270,27 @@ $("#btnUserAdd").on("click", function(){
 //		$(this).next().remove();
 //		$(this).siblings().remove();
 
+=======
+<%-- User input 여러개 등록--%>
+$("#btnUserAdd").on("click", function(){
+	
+	$(".btnAdd").append("<br><label>회원 닉네임</label><input name='nickname'/> <button type='button' class='btn btn-primary btnUserConfirmed'>등록</button> <button type='button' class='btn btn-warning btnUserDelete'>삭제</button> <br>");
+
+	$(".btnUserDelete").on("click", function(){
+//		$(this).siblings().remove();
+ 		$(this).prev().prev().prev().prev().remove();
+		$(this).prev().prev().prev().remove();
+		$(this).prev().prev().remove();
+		$(this).prev().remove(); 
+		$(this).next().remove();
+		$(this).remove();
+		
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 	});
 	
 });
 
+<<<<<<< HEAD
 //#frmBoard > div.btnAdd > input:nth-child(8)
 
 <%-- 확정버튼 클릭시 readonly 처리 --%>
@@ -248,6 +311,15 @@ $("#btnUserConfirmed").on("click", function(){
 });
 
 
+=======
+
+<%-- User input 삭제 --%>
+$(".btnUserDelete").on("click", function(){
+	alert("삭제되었습니다.");
+	
+});
+
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 <%-- 더치페이 게시글 내용 등록버튼 값 --%>
 $("#btnRegister").on("click", function(){
 	
@@ -263,6 +335,7 @@ $("#btnRegister").on("click", function(){
 });
 
 
+<<<<<<< HEAD
 <%-- 페이징 처리: 회원정보 목록 페이징 이동 --%>
 $("li.pagination-button a").on("click", function(e){
 	e.preventDefault();
@@ -278,6 +351,8 @@ $("li.pagination-button a").on("click", function(e){
 
 
 
+=======
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 
 
 

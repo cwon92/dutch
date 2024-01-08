@@ -125,6 +125,7 @@
 </div>
 
 <form id="frmSendValue">
+<<<<<<< HEAD
 <%-- 	<input type="hidden" name="pageNum" value="${dutchPaging.pageNum }" >
 	<input type="hidden" name="rowAmountPerPage" value="${dutchPaging.rowAmountPerPage }" > --%>
 	
@@ -164,6 +165,13 @@
 		</div><%-- /.panel --%>
 	</div><%-- .col-lg-12 --%>
 </div><%-- .row : 댓글 화면 표시 끝 --%>			
+=======
+
+
+
+</form>
+
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 <script>
 
 var frmSendValue = $("#frmSendValue") ;
@@ -179,9 +187,12 @@ $("#btnToList").on("click", function(){
 <%-- 게시물 수정-삭제 페이지로 이동 --%>
 $("#btnToModify").on("click", function(){
 	
+<<<<<<< HEAD
 	var pno = '<c:out value="${dutchboard.pno}"/>' ;
 	
 	frmSendValue.append("<input type='hidden' name='pno' value='" + pno + "'/>") ;
+=======
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 	frmSendValue.attr("action", "${contextPath}/pages/dutchmodify").attr("method", "get");
 	frmSendValue.submit();
 	

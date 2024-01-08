@@ -2,15 +2,21 @@ package com.spring.dutch.mapper;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import com.spring.dutch.dto.DutchBoardPagingDTO;
 import com.spring.dutch.dto.DutchRegisterPagingDTO;
 import com.spring.dutch.domain.DutchBoardVO;
 import com.spring.dutch.domain.MemberVO;
+=======
+import com.spring.dutch.domain.DutchBoardVO;
+import com.spring.dutch.dto.DutchBoardPagingDTO;
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c
 
 public interface DutchBoardMapper {
 
 	//게시물 목록조회(READ)
 	public List<DutchBoardVO> selectDutchBoardList(DutchBoardPagingDTO ductPaging) ;
+<<<<<<< HEAD
 
 	//게시물 총수(READ)
 	public long selectDutchRowTotal(DutchBoardPagingDTO dutchboardPaging);
@@ -45,3 +51,19 @@ public interface DutchBoardMapper {
 	
 	
 }
+=======
+	
+	//게시물 총수(READ)
+	public long selectDutchRowTotal(DutchBoardPagingDTO dutchboardPaging);
+	
+	//더치페이 게시물 등록(CREATE)
+	public int insertDutchBoard(DutchBoardVO dutchBoard);
+	
+	//더치페이 특정 게시물 조회(detail.jsp): 특정 게시물 데이터를 가져옴
+	public DutchBoardVO selectDutchBoard(long pno);
+	
+	
+	
+	
+}
+>>>>>>> e2b5c22a1742134bd2bdb8fe7f7febfafe404d0c

@@ -1,5 +1,8 @@
 package com.spring.dutch.domain;
 
+import java.util.Date;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +14,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CardVO {
-	private String kno;
-	private String category;
-	private String kname;
-	private String kcontent;
-	private String kcompany;
-	private int kcomment;
+public class ParticipantsResultVO {
+	private long pno;
+	private String ptitle;
+	private Date pregDate;
+	private long ppersonal;
+	private List<String> userList;
 }

@@ -4,11 +4,15 @@ import java.util.List;
 
 import com.spring.dutch.domain.MemberVO;
 
+
 public interface MypageService {
 
 	//회원정보 가져오기
-	public MemberVO getMemberData (long mno) ;
+	public MemberVO getMemberData (String mno) ;
 	
 	//회원정보 수정 (UPDATE)
-	public boolean modifyMember(MemberVO member);
+	public int modifyMember(MemberVO member);
+	
+	//회원 탈퇴 (DELETE)
+	public boolean withdrawMember (String mno);
 }

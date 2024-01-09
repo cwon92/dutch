@@ -131,6 +131,26 @@
     </div><%-- /.row --%>
 </div>
 
+
+<%-- Modal --%>
+<div class="modal fade" id="yourModal" tabindex="-1" role="dialog" aria-labelledby="yourModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="yourModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body" id="yourModal-body">메시지</div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div><%-- /.modal-content --%>
+    </div><%-- /.modal-dialog --%>
+</div><%-- /.modal --%>
+
+
+
 <form id="frmSendMno">
 	<input type="hidden" name="mno" value="${memberData.mno }" >
 </form>
@@ -139,12 +159,11 @@
 <script>
 
 var frmSendMno = $("#frmSendMno") ;
-<%-- 처음 마이페이지로 이동 --%>
+<%-- 취소버튼 누르면 처음 마이페이지로 이동 --%>
 $("#btnToMypage").on("click", function(){
 <%--
 	window.location.href="${contextPath}/myboard/list" ;
 --%>
-	console.log("되나안되나");
 	frmSendMno.attr("action", "${contextPath}/mypage/home").attr("method", "get") ;
 	frmSendMno.submit() ;
 });
@@ -160,10 +179,32 @@ $("#btnModify").on("click", function(){
 });
 
 
+<%-- 모달 호출 함수--%><%--
+function runModal(result) {
+	
+	if (result.length == 0) {
+		return ;
+	
+	} else if ( result == "successModify" ) {
+		var myMsg =  "회원정보 수정 완료 " ;
+		
+	} else if ( result == "failModify" ) {
+		var myMsg =  "회원정보 수정 불가" ;
+		
+	} 
+	
+	//$(".modal-body").html(myMsg) ;
+	$("#yourModal-body").html(myMsg) ;
+	
+	$("#yourModal").modal("show") ;
+	
+	myMsg = "" ;
+}
 
-
-
-
+$(document).ready(function(){
+	runModal(result) ;
+});--%>
+ 
 </script>
 
 

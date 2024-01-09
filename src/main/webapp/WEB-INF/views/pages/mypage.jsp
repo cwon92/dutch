@@ -57,9 +57,9 @@
 						<div class="col-md-7" style="height: 45px; padding-top:6px;"><%-- vertical-align: middle; --%>
 							<div class="button-group pull-right">
 								<button type="button" id="btnToModify" data-oper="modify"
-										class="btn btn-primary"><span>수정페이지로 이동</span></button><!-- 
-								<button type="button" id="btnToList" data-oper="list"
-										class="btn btn-warning"><span>목록페이지로 이동</span></button> -->
+										class="btn btn-primary"><span>수정페이지로 이동</span></button>
+								<button type="button" id="btnToWithdraw" data-oper="list"
+										class="btn btn-danger"><span>회원 탈퇴</span></button>
 							</div>
 						</div>
 					</div>
@@ -126,7 +126,7 @@
 					    <label class="col-sm-2 control-label" style="white-space: nowrap;">가입일자</label>
 					    <div class="col-sm-10">
 					    	<input class="form-control" name="regDate" id="regDate" 
-					    		   value="${memberData.regDate }" readonly="readonly">
+					    		   value="<fmt:formatDate value="${memberData.regDate }" pattern="yyyy/MM/dd HH:mm:ss"/>" readonly="readonly">
 						</div>
 					</div>
 					
@@ -161,6 +161,23 @@
 </div>
 
 
+<%-- Modal --%>
+<div class="modal fade" id="yourModal" tabindex="-1" role="dialog" aria-labelledby="yourModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="yourModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body" id="yourModal-body">메시지</div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div><%-- /.modal-content --%>
+    </div><%-- /.modal-dialog --%>
+</div><%-- /.modal --%>
+
 
 
 
@@ -181,26 +198,66 @@ $("#history").on("click",function(){
 });
 
 
-<%-- 게시물 수정-삭제 페이지 이동 --%>/* 
-$("#btnToModify").on("click", function(){
-	window.location.href = "${contextPath}/modify"
-}); */
-
-
-
 
 var frmSendMno = $("#frmSendMno") ;
 
 <%-- 회원정보 수정 페이지 이동 --%>
 $("#btnToModify").on("click", function(){
 
-
+	//window.location.href = "${contextPath}/modify"
 	frmSendMno.attr("action", "${contextPath}/mypage/modify").attr("method", "get") ;
 	frmSendMno.submit() ;
 });
 
 
+<%-- 회원 탈퇴 버튼 눌렀을 때--%>
+$("#btnToWithdraw").on("click", function(){
+	
+ 	if(confirm("회원 탈퇴 하시겠습니까?")){
+ 		frmSendMno.attr("action", "${contextPath}/mypage/withdraw").attr("method", "get") ;
+ 		frmSendMno.submit() ;
+	} 
+});
 
+
+var result = '<c:out value="${result}"/>';
+console.log(result);
+<%-- 모달 호출 함수--%>
+function runModal(result) {
+	
+//	if (result.length == 0) {
+	if (result == "" ) {
+		
+		return ;
+	
+	} else if ( result == "successModify" ) {
+		var myMsg =  "회원정보 수정 완료 " ;
+		
+	} else if ( result == "failModify" ) {
+		var myMsg =  "회원정보 수정 불가 " ;
+		
+	} else if ( result == "successWithdraw" ) {
+		var myMsg =  "회원 탈퇴 완료 " ;
+		
+	} else if ( result == "failWithdraw" ) {
+		var myMsg =  "회원 탈퇴 오류 " ;
+		
+	}
+
+	
+	//$(".modal-body").html(myMsg) ;
+	$("#yourModal-body").html(myMsg) ;
+	
+	$("#yourModal").modal("show") ;
+	
+	myMsg = "" ;
+}
+
+/* 
+$(document).ready(function(){
+	runModal(result) ;
+});
+ */
 
 </script>
  

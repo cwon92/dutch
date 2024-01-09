@@ -6,7 +6,7 @@
 
 <!-- mno로 회원정보 가져오기 -->
 <select id="selectMemberData" resultType="com.spring.dutch.domain.MemberVO"
-		parameterType="long">
+		parameterType="String">
 	SELECT  mno, nickname, bank, bank_account,
 		    username, email, password, hp, cellphone,
 		    reg_date, mod_date, del_flag, enabled,
@@ -26,6 +26,10 @@
 		WHERE mno = #{mno}	
 	</update>
 
-
+<!-- 회원탈퇴 (DELETE) -->
+	<delete id="deleteMember" parameterType="String">
+		DELETE FROM dutch.tbl_member
+		WHERE mno = #{mno} 
+	</delete>
 
 </mapper>

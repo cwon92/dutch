@@ -175,7 +175,7 @@
 					    data-uuid = "${attachFile.uuid }" 
 					    data-filename = "${attachFile.fileName }" 
 					    data-filetype = "I" >
-					        <img src='${contextPath}/displayThumbnail?fileName=${thumbnail}' style='width:25px;'>
+					        <img src='${contextPath}/communityDisplayThumbnail?fileName=${thumbnail}' style='width:25px;'>
 					        &nbsp;&nbsp;${attachFile.fileName}
 					</li>
 					<c:remove var="thumbnail"/>

@@ -120,7 +120,7 @@
 			<c:when test="${community.tdelFlag == 1 }">
 				<tr style="background-color: Moccasin; text-align: center">
 				<%--     <td>${community.tno }</td> --%>
-				    <td colspan="6"><em>삭제된 게시글입니다.</em></td>
+				    <td colspan="6"><em>작성자에 의해서 삭제된 게시글입니다.</em></td>
 				</tr>
 			</c:when>
 			<c:otherwise>

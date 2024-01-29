@@ -31,9 +31,34 @@
                   <hr>
                   <span>authentication: ${authentication}</span>
                   <hr> --%>
-		</c:otherwise>
+		</c:otherwise> 
 	</c:choose>
 </h3>
+
+
+
+<P>  The time on the server is ${serverTime}. </P>
+
+<h2>     <a href="${contextPath }/admin">관리자</a> &nbsp;
+
+		<a href ="admin">관리자 페이지 가기</a>&nbsp;
+		
+		<a href ="dba">DB관리자 페이지 가기</a>&nbsp;
+		<a href =" ${contextPath }/community/detail">일반 페이지 가기</a>&nbsp;
+  		<a href="${contextPath }/">홈</a>&nbsp;
+        <a href="${contextPath }/mypage/home">마이페이지</a>&nbsp;
+        <a href="${contextPath }/pay/list">더치페이 게시판</a>&nbsp;
+        <a href="${contextPath }/community/list">커뮤니티</a>&nbsp;
+
+</h2>
+
+
+
+
+
+
+&nbsp;
+
 <div class="container">
 <div id="carousel-example-generic" class="carousel slide"
 	data-ride="carousel">
@@ -65,6 +90,7 @@
 	</a>
 </div>
 </div>
+
 <div class="container container-margin">
 	<div class="row">
 		<div class="col-md-6">
@@ -93,7 +119,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6"> 
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">인기 커뮤니티<button type="button" class="btn btn-xs btn-link" style="float:right;">더보기</button></h3>
@@ -179,10 +205,12 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
-
 </div>
+
+
+
+
 
 
 <script>

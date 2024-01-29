@@ -272,7 +272,7 @@ $("#inputFile").on("change", function(){
 	url 키에 명시된 주소의 컨트롤러에게 formData 객체를 POST 방식으로 전송.--%>
 	$.ajax({
 		type: "post" ,
-		url: "${contextPath}/fileUploadAjaxAction" ,
+		url: "${contextPath}/communityFileUploadAjaxAction" ,
 		data: formData ,
 		contentType: false , <%--contentType에 MIME 타입을 지정하지 않음.--%>
 		processData: false , <%--contentType에 설정된 형식으로 data를 처리하지 않음. --%>
@@ -304,7 +304,7 @@ $(".fileUploadResult ul").on("click","li span", function(e){
 	
 	$.ajax({
 		type: "post" ,
-		url: "${contextPath}/deleteFile" ,
+		url: "${contextPath}/communityDeleteFile" ,
 		data: {fileName: fileName, fileType: fileType} ,
 		dataType: "text" , 
 		beforeSend: function(xhr){

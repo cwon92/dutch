@@ -66,6 +66,13 @@ p {
 								<sec:authorize access="isAuthenticated()">
 									<sec:authentication property="principal.username"
 										var="username" />
+										
+									<c:if test="${username != dto.dutchboard.nickname }">
+										<button type="button" id="btnReport" data-oper="report"
+											class="btn btn-danger">
+											<span>신고</span>
+										</button>
+									</c:if>
 
 									<c:if test="${username == dto.dutchboard.nickname }">
 										<c:choose>
@@ -393,7 +400,14 @@ function runModal(result) {
 	myMsg = "" ;
 }
 
-
+<%-- 신고 버튼 눌렀을 때--%>
+$("#btnReport").on("click", function(){
+	
+ 	if(confirm("신고 하시겠습니까?")){
+ 		frmSendValue.attr("action", "${contextPath}/pay/report").attr("method", "get") ;
+ 		frmSendValue.submit() ;
+	} 
+});
 </script>
 
 
@@ -970,6 +984,28 @@ $(document).ready(function(){
 </script>
 
 
+<%-- 첨부파일 이미지 표시 --%>
+<script>
+$(".attachLi").on("click", function(){
+	var objLi = $(this) ;
+	
+	var myFileName = objLi.data("repopath") + "/" + objLi.data("uploadpath") + "/" 
+				   + objLi.data("uuid") + "_" + objLi.data("filename") ;
+	
+	var myFileType = objLi.data("filetype") ;
+	
+	if(myFileType == "I") {
+		$("#attachModal-body").html("<img src='${contextPath}/dutchFileDownloadAjax?fileName=" 
+										      + encodeURI(myFileName) 
+										      + "' style='width:100%;'>") ;
+		$("#attachModal").modal("show") ;
+	
+	} else {
+		self.location.href ="${contextPath}/dutchFileDownloadAjax?fileName="  + encodeURI(myFileName) ;
+	}
+	
+});
+</script>
 
 
 

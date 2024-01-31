@@ -5,8 +5,10 @@ import java.util.List;
 import com.spring.dutch.domain.CommunityVO;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
+@Setter
 @Getter
 @ToString
 public class CommunityPagingCreatorDTO {

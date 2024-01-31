@@ -38,7 +38,7 @@ public class DutchBoardController {
 
 	//더치페이 목록 조회
 	@GetMapping("/list") 
-	public String showBoardList(DutchBoardPagingDTO dutchboardPaging, Model model, String deleteResult) {
+	public String showBoardList(DutchBoardPagingDTO dutchboardPaging, Model model, String result) {
 		
 	    System.out.println("dutchboardPagingDTO" + dutchboardPaging); 
 
@@ -47,7 +47,7 @@ public class DutchBoardController {
 
 	    model.addAttribute("pagingCreator", pagingCreator);
 	    
-		model.addAttribute("deleteResult", deleteResult);
+		model.addAttribute("result", result);
 
 	  return "pages/dutchList"; 
 	}
@@ -171,10 +171,10 @@ public class DutchBoardController {
 		boolean deleteResult = dutchBoardService.deleteDutchBoard(pno);
 		System.out.println("======================게시글 삭제 deleteResult : "+ deleteResult);
 		if (deleteResult) {
-			model.addAttribute("deleteResult", "successDelete");
+			model.addAttribute("result", "successDelete");
 
 		} else {
-			model.addAttribute("deleteResult", "failDelete");
+			model.addAttribute("result", "failDelete");
 		}
 		
 		return "redirect:/pay/list";
@@ -199,7 +199,45 @@ public class DutchBoardController {
 		return "redirect:/pay/detail";
 	}
 
+	//게시글 신고
+	@GetMapping(value = "/report")
+	@PreAuthorize("isAuthenticated()")
+	public String dutchBoardDelete (long pno, Model model) {
+		System.out.println("신고컨트롤러 도착");
+			
+		boolean reportResult = dutchBoardService.updatePreport(pno);
+		
+		if (reportResult) {
+			model.addAttribute("result", "successReport");
 
+		} else {
+			model.addAttribute("result", "failReport");
+		}
+		model.addAttribute("pno", pno);
+
+		
+		return "redirect:/pay/list";
+	}
+
+	
+	//신고받은 목록만 조회
+	@GetMapping("/reportedList") 
+	public String showReportList(DutchBoardPagingDTO dutchboardPaging, Model model, String result) {
+		
+	    System.out.println("dutchboardPagingDTO" + dutchboardPaging); 
+
+	    DutchBoardPagingCreatorDTO pagingCreator = dutchBoardService.getDutchList(dutchboardPaging);
+	    //System.out.println("컨트롤러에 저장된 DutchboardPagingCreator \n" + pagingCreator);  
+
+	    model.addAttribute("pagingCreator", pagingCreator);
+	    
+		model.addAttribute("result", result);
+
+	  return "pages/dutchReportList"; 
+	}
+	
+	
+	
 
 	
 	

@@ -137,12 +137,9 @@ p {
 								<button type="button" class="btn btn-primary"
 									data-dismiss="modal">Close</button>
 							</div>
-						</div>
-						<%-- /.modal-content --%>
-					</div>
-					<%-- /.modal-dialog --%>
-				</div>
-				<%-- /.modal --%>
+						</div><%-- /.modal-content --%>
+					</div><%-- /.modal-dialog --%>
+				</div><%-- /.modal --%>
 
 				<form id="frmSendValue">
 					<input type="hidden" name="pageNum" value="${qnaPaging.pageNum }">
@@ -151,8 +148,7 @@ p {
 					<input type="hidden" name="${_csrf.parameterName }"
 							value="${_csrf.token }" /> --%>
 				</form>
-			</div>
-			<%-- /.panel-body --%>
+			</div><%-- /.panel-body --%>
 
 		</div>
 		<%-- /.panel --%>
@@ -244,9 +240,10 @@ p {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div style="margin-bottom: 0px; font-size: 16px;">
-					<strong style="padding-top: 2px;"> <span>댓글&nbsp;<c:out
-								value="${qna.qreplyCnt}" />개
-					</span> <span id="replyTotal"></span> <span>&nbsp;</span>
+					<strong style="padding-top: 2px;"> <%-- 
+					<span>댓글&nbsp;<c:out value="${qna.qreplyCnt}"/>개</span> --%>
+					<span id="replyTotal"></span> 
+					<span>&nbsp;</span>
 
 						<button type="button" id="btnChgCmtReg"
 							class="btn btn-info btn-sm">댓글 작성</button>
@@ -277,7 +274,6 @@ p {
 			</div>
 			<%-- /.panel-body --%>
 			<div class="panel-footer text-center" id="showCmtPagingNums">
-				<%-- 댓글 목록의 페이징 번호 표시 영역 - JavaScript로 내용이 생성되어 표시됩니다.--%>
 			</div>
 		</div>
 		<%-- /.panel --%>
@@ -498,11 +494,13 @@ function showCmtList(pageNum){
 		
 		function(qnareplyPagingCreator){
 			
+			$("#replyTotal").html("댓글&nbsp;" + qnareplyPagingCreator.replyTotCnt + "개") ;
+			
 			frmCmtPagingValue.find("input[name='pageNum']").val(pageNum) ;
 			frmCmtPagingValue.find("input[name='rowAmountPerPage']").val(qnareplyPagingCreator.qnareplyPaging.rowAmountPerPage) ;
 			
 			var str = '' ;
-			
+			replyTotal
 			if(!qnareplyPagingCreator.qnareplyList || qnareplyPagingCreator.qnareplyList.length == 0){
 				str += '<li class="left clearfix commentLi" '
 					+ ' 	style="text-align: center; background-color: lightCyan;'

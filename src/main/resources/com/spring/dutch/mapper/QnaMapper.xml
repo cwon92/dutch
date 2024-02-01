@@ -17,7 +17,7 @@
 			parameterType="com.spring.dutch.dto.QnaPagingDTO">
 	<![CDATA[
 		SELECT qno, nickname, qtitle, qcontent, qregDate, qmodDate, qdelFlag, qdelFlagAdmin, qsignal, qreplyCnt
-		FROM ( SELECT /*+ INDEX_DESC (a FK_QNA_NICKNAME) */ ROWNUM rn, a.*
+		FROM ( SELECT /*+ INDEX_DESC (a SYS_C008943) */ ROWNUM rn, a.*
 		       FROM dutch.tbl_qna a
 		       WHERE 
 	]]>

@@ -61,7 +61,7 @@ public class NoticeController {
 		
 		redirectAttr.addFlashAttribute("result", cno);
 		
-		return "redirect:/pages/noticelist";
+		return "redirect:/notice/list";
 	}
 
 	
@@ -128,7 +128,7 @@ public class NoticeController {
 		//redirectAttr.addAttribute("scope", noticePaging.getScope());
 		redirectAttr.addAttribute("keyword", noticePaging.getKeyword());
 		
-		return "redirect:/pages/noticedetail";
+		return "redirect:/notice/detail";
 	}		
 	
 	//특정 게시물 삭제

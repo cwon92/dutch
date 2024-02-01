@@ -3,6 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 
@@ -42,7 +43,6 @@
 					<option value="30" ${(qnaCreator.qnaPaging.rowAmountPerPage == 30) ? "selected" : "" }>30개</option>
 					<option value="50" ${(qnaCreator.qnaPaging.rowAmountPerPage == 50) ? "selected" : "" }>50개</option>
 				</select>
-
 	
 	<input type="hidden" id="pageNum" name="pageNum" value="${qnaCreator.qnaPaging.pageNum }" > 
 	<input type="hidden" id="lastPageNum" name="lastPageNum" value="${qnaCreator.lastPageNum }" >
@@ -57,8 +57,9 @@
 			   />
 
 		<button type="button" class="btn btn-primary mybtns" 
-				id="btnIntervalSearch" >작성일 기간검색</button>
+				id="btnIntervalSearch" >기간검색</button>
 	</div>
+
 	               
 <hr>  
 	</form>  
@@ -72,7 +73,6 @@
       <th>닉네임</th>
       <th>작성일</th>
       <th>수정일</th>
-      <!-- <th>답변</th> -->
       <th>문의상황</th>
     </tr>
 </thead>
@@ -102,9 +102,6 @@
 					<td>${qna.nickname }</td>
 					<td class="center"><fmt:formatDate value="${qna.qregDate }" pattern="yyyy/MM/dd  HH:mm:ss"/></td>
 					<td class="center"><fmt:formatDate value="${qna.qmodDate }" pattern="yyyy/MM/dd  HH:mm:ss"/></td>
-				 	<%-- <td style="text-align: center;">
-						<small><strong><c:out value="${qna.qreplyCnt}"/></strong></small>
-					</td> --%>
 				 	<td style="text-align: center;">
 				 		<c:choose>
 				 			<c:when test="${qna.qsignal == 0}">

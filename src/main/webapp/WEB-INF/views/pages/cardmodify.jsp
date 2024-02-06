@@ -66,6 +66,8 @@
 	    	<option value="회식">회식</option>
 	    	<option value="카페">카페</option>
 	    	<option value="식사">식사</option>
+	    	<option value="카풀">카풀</option>
+	    	<option value="모임">모임</option>
 	    	<option value="공동구매">공동구매</option>
 	    </select>
 	</div>
